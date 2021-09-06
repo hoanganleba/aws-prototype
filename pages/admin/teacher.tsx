@@ -1,5 +1,5 @@
 import type {NextPage} from 'next'
-import AdminLayout from 'components/AdminLayout'
+import AdminLayout from 'components/Layouts/AdminLayout'
 import Link from "next/link";
 
 const Teacher: NextPage = () => {
@@ -8,7 +8,7 @@ const Teacher: NextPage = () => {
             <div className="mt-11 flex justify-between mb-6">
                 <h2 className="text-2xl text-gray-800 font-semibold">Teacher</h2>
                 <div className="text-sm flex items-center font-medium">
-                    <Link href="/admin/dashboard">
+                    <Link href="/admin">
                         <a className="text-gray-600">Dashboard</a>
                     </Link>
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-2 w-2 mx-2" fill="none" viewBox="0 0 24 24"

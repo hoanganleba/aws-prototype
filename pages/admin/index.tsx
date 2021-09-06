@@ -1,7 +1,7 @@
 import type {NextPage} from 'next'
-import AdminLayout from 'components/AdminLayout'
+import AdminLayout from 'components/Layouts/AdminLayout'
 
-const Dashboard: NextPage = () => {
+const Index: NextPage = () => {
     return (
         <>
             <h2 className="text-2xl text-gray-800 font-semibold mt-11 mb-6">Dashboard</h2>
@@ -21,10 +21,10 @@ const Dashboard: NextPage = () => {
 }
 
 // @ts-ignore
-Dashboard.getLayout = (page: any) => (
+Index.getLayout = (page: any) => (
     <AdminLayout>
         {page}
     </AdminLayout>
 )
 
-export default Dashboard
+export default Index

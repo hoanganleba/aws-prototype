@@ -1,14 +1,14 @@
 import type {NextPage} from 'next'
-import AdminLayout from 'components/Layouts/AdminLayout'
 import Link from "next/link";
+import TeacherLayout from "components/Layouts/TeacherLayout";
 
-const Student: NextPage = () => {
+const Course: NextPage = () => {
     return (
         <>
             <div className="mt-11 flex justify-between mb-6">
-                <h2 className="text-2xl text-gray-800 font-semibold">Student</h2>
+                <h2 className="text-2xl text-gray-800 font-semibold">Course</h2>
                 <div className="text-sm flex items-center font-medium">
-                    <Link href="/admin">
+                    <Link href="/teacher">
                         <a className="text-gray-600">Dashboard</a>
                     </Link>
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-2 w-2 mx-2" fill="none" viewBox="0 0 24 24"
@@ -16,7 +16,7 @@ const Student: NextPage = () => {
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
                               d="M13 5l7 7-7 7M5 5l7 7-7 7"/>
                     </svg>
-                    <p className="text-blue-500">Student</p>
+                    <p className="text-blue-500">Course</p>
                 </div>
             </div>
             <div className="rounded-2xl bg-white p-5">
@@ -33,11 +33,11 @@ const Student: NextPage = () => {
                         </svg>
                     </div>
                     <button className="py-2 px-5 font-medium bg-blue-500 text-white rounded-full flex items-center">
-                        <span className="mr-2">Add Student</span>
-                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                        <span className="mr-2">Add Course</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24"
                              stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
-                                  d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"/>
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"
+                                  d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
                         </svg>
                     </button>
                 </div>
@@ -61,10 +61,10 @@ const Student: NextPage = () => {
                             Status
                         </th>
                         <th scope="col">
-                                            <span
-                                                className="font-medium px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                Actions
-                                            </span>
+                            <span
+                                className="font-medium px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Actions
+                            </span>
                         </th>
                     </tr>
                     </thead>
@@ -93,10 +93,10 @@ const Student: NextPage = () => {
                             <div className="text-sm text-gray-500">Optimization</div>
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap">
-                                            <span
-                                                className="px-2 inline-flex text-xs leading-5 font-medium rounded-full bg-green-100 text-green-800">
-                                                Active
-                                            </span>
+                            <span
+                                className="px-2 inline-flex text-xs leading-5 font-medium rounded-full bg-green-100 text-green-800">
+                                Active
+                            </span>
                         </td>
                         <td className="px-6 py-4 flex justify-center">
                             <div
@@ -125,10 +125,10 @@ const Student: NextPage = () => {
 }
 
 // @ts-ignore
-Student.getLayout = (page: any) => (
-    <AdminLayout>
+Course.getLayout = (page: any) => (
+    <TeacherLayout>
         {page}
-    </AdminLayout>
+    </TeacherLayout>
 )
 
-export default Student
+export default Course

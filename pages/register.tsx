@@ -26,11 +26,9 @@ const Register: NextPage = () => {
                         <input
                             className="block w-full bg-gray-100 mb-5 font-medium py-2.5 px-4 rounded-2xl placeholder-gray-500"
                             aria-label="password" placeholder="Password"/>
-                        <Link href="/login">
-                            <a className="block bg-blue-500 rounded-full py-3 px-6 text-center font-medium text-white">
-                                Sign Up
-                            </a>
-                        </Link>
+                        <a className="block bg-blue-500 rounded-full py-3 px-6 text-center font-medium text-white">
+                            Sign Up
+                        </a>
                     </form>
                 </div>
             </div>

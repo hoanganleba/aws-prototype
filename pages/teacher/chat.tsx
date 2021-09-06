@@ -1,8 +1,8 @@
 import type {NextPage} from 'next'
-import AdminLayout from 'components/Layouts/AdminLayout'
 import Link from 'next/link'
 import profilePic from 'public/Path_2.png'
 import Image from 'next/image'
+import TeacherLayout from 'components/Layouts/TeacherLayout'
 
 const Chat: NextPage = () => {
     return (
@@ -10,7 +10,7 @@ const Chat: NextPage = () => {
             <div className="mt-11 flex justify-between mb-6">
                 <h2 className="text-2xl text-gray-800 font-semibold">Chat</h2>
                 <div className="text-sm flex items-center font-medium">
-                    <Link href="/admin">
+                    <Link href="/teacher">
                         <a className="text-gray-600">Dashboard</a>
                     </Link>
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-2 w-2 mx-2" fill="none" viewBox="0 0 24 24"
@@ -114,9 +114,9 @@ const Chat: NextPage = () => {
 
 // @ts-ignore
 Chat.getLayout = (page: any) => (
-    <AdminLayout>
+    <TeacherLayout>
         {page}
-    </AdminLayout>
+    </TeacherLayout>
 )
 
 export default Chat

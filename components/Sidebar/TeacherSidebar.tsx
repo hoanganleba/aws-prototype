@@ -1,11 +1,10 @@
 import React from 'react'
 import Image from 'next/image'
 import profilePic from 'public/Image_1.png'
-import {Menu} from '@headlessui/react'
 import Link from 'next/link'
-import { useRouter } from 'next/router'
+import {useRouter} from 'next/router'
 
-const Sidebar = () => {
+const TeacherSidebar = () => {
     const router = useRouter()
 
     return (
@@ -14,8 +13,8 @@ const Sidebar = () => {
                 <Image src={profilePic} alt="Picture of the author"/>
             </div>
 
-            <Link href="/admin/dashboard">
-                <a className={`${router.pathname == "/admin/dashboard" ? "border-l-4 border-blue-500" : ""} flex py-1 px-6 my-4`}>
+            <Link href="/teacher">
+                <a className={`${router.pathname == "/teacher" ? "border-l-4 border-blue-500" : ""} flex py-1 px-6 my-4`}>
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7 text-blue-500" fill="none"
                          viewBox="0 0 24 24"
                          stroke="currentColor">
@@ -25,30 +24,18 @@ const Sidebar = () => {
                     <p className="text-blue-500 font-medium ml-4">Dashboard</p>
                 </a>
             </Link>
-            <Link href="/admin/teacher">
-                <a className={`${router.pathname == "/admin/teacher" ? "border-l-4 border-blue-500" : ""} flex py-1 px-6 my-4`}>
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7 text-blue-500" fill="none"
-                         viewBox="0 0 24 24"
+            <Link href="/teacher/course">
+                <a className={`${router.pathname == "/teacher/course" ? "border-l-4 border-blue-500" : ""} flex py-1 px-6 my-4`}>
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7 text-blue-500" fill="none" viewBox="0 0 24 24"
                          stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5"
-                              d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/>
+                              d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
                     </svg>
-                    <p className="text-blue-600 font-medium ml-4">Teacher</p>
+                    <p className="text-blue-600 font-medium ml-4">Course</p>
                 </a>
             </Link>
-            <Link href="/admin/student">
-                <a className={`${router.pathname == "/admin/student" ? "border-l-4 border-blue-500" : ""} flex py-1 px-6 my-4`}>
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7 text-blue-500" fill="none"
-                         viewBox="0 0 24 24"
-                         stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5"
-                              d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/>
-                    </svg>
-                    <p className="text-blue-600 font-medium ml-4">Student</p>
-                </a>
-            </Link>
-            <Link href="/admin/chat">
-                <a className={`${router.pathname == "/admin/chat" ? "border-l-4 border-blue-500" : ""} flex py-1 px-6 my-4`}>
+            <Link href="/teacher/chat">
+                <a className={`${router.pathname == "/teacher/chat" ? "border-l-4 border-blue-500" : ""} flex py-1 px-6 my-4`}>
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7 text-blue-500" fill="none"
                          viewBox="0 0 24 24"
                          stroke="currentColor">
@@ -62,4 +49,4 @@ const Sidebar = () => {
     )
 }
 
-export default Sidebar
+export default TeacherSidebar

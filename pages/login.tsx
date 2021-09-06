@@ -1,5 +1,4 @@
 import type {NextPage} from 'next'
-import Link from 'next/link'
 
 const Login: NextPage = () => {
     return (
@@ -23,11 +22,9 @@ const Login: NextPage = () => {
                                    type="checkbox"/>
                             <h6 className="font-medium ml-4">Keep me signed in</h6>
                         </div>
-                        <Link href="/admin/dashboard">
-                            <a className="block bg-blue-500 rounded-full py-3 px-6 text-center font-medium text-white">
-                                Sign In
-                            </a>
-                        </Link>
+                        <a className="block bg-blue-500 rounded-full py-3 px-6 text-center font-medium text-white">
+                            Sign In
+                        </a>
                     </form>
                 </div>
             </div>
