@@ -1,7 +1,12 @@
 import 'styles/globals.css'
+// @ts-ignore
 import {AppContext, AppInitialProps, AppLayoutProps} from 'next/app'
 import type {NextComponentType} from 'next'
 import {ReactNode} from 'react'
+import Amplify from 'aws-amplify'
+import config from 'src/aws-exports'
+
+Amplify.configure({...config, ssr: true})
 
 const MyApp: NextComponentType<AppContext, AppInitialProps, AppLayoutProps> =
     ({

@@ -24,8 +24,8 @@ const AdminSidebar = () => {
                     <p className="text-blue-500 font-medium ml-4">Dashboard</p>
                 </a>
             </Link>
-            <Link href="/admin/teacher">
-                <a className={`${router.pathname == "/admin/teacher" ? "border-l-4 border-blue-500" : ""} flex py-1 px-6 my-4`}>
+            <Link href="/admin/teachers">
+                <a className={`${router.pathname == "/admin/teachers" ? "border-l-4 border-blue-500" : ""} flex py-1 px-6 my-4`}>
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7 text-blue-500" fill="none"
                          viewBox="0 0 24 24"
                          stroke="currentColor">
@@ -35,8 +35,8 @@ const AdminSidebar = () => {
                     <p className="text-blue-600 font-medium ml-4">Teacher</p>
                 </a>
             </Link>
-            <Link href="/admin/student">
-                <a className={`${router.pathname == "/admin/student" ? "border-l-4 border-blue-500" : ""} flex py-1 px-6 my-4`}>
+            <Link href="/admin/students">
+                <a className={`${router.pathname == "/admin/students" ? "border-l-4 border-blue-500" : ""} flex py-1 px-6 my-4`}>
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7 text-blue-500" fill="none"
                          viewBox="0 0 24 24"
                          stroke="currentColor">

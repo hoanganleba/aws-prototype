@@ -1,4 +1,5 @@
 import type {NextPage} from 'next'
+import Link from 'next/link'
 
 const Login: NextPage = () => {
     return (
@@ -8,7 +9,9 @@ const Login: NextPage = () => {
                     <h4 className="font-semibold text-4xl text-center">Sign In</h4>
                     <div className="flex justify-center my-6">
                         <h6 className="font-medium mr-4">New user?</h6>
+                        <Link href="/register">
                         <a className="text-blue-500 font-medium">Create an account</a>
+                        </Link>
                     </div>
                     <form>
                         <input
