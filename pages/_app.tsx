@@ -1,5 +1,4 @@
 import 'styles/globals.css'
-// @ts-ignore
 import {AppContext, AppInitialProps, AppLayoutProps} from 'next/app'
 import type {NextComponentType} from 'next'
 import {ReactNode} from 'react'
