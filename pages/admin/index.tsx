@@ -10,8 +10,8 @@ const Index: NextPage = () => {
 
     const getNumOfUsers = async () => {
         const userModel = await DataStore.query(User)
-        setNumOfStudents(userModel.filter(data => data.Role?.name === 'Student').length)
-        setNumOfTeachers(userModel.filter(data => data.Role?.name === 'Teacher').length)
+        setNumOfStudents(userModel.filter(data => data.role?.name === 'Student').length)
+        setNumOfTeachers(userModel.filter(data => data.role?.name === 'Teacher').length)
     }
 
     useEffect(() => {
@@ -22,7 +22,7 @@ const Index: NextPage = () => {
     }, [])
 
     return (
-        <>
+        <div className="container mx-4">
             <h2 className="text-2xl text-gray-800 font-semibold mt-11 mb-6">Dashboard</h2>
             <div className="grid grid-cols-4 gap-x-6">
                 <div className="bg-white rounded-2xl p-6">
@@ -35,7 +35,7 @@ const Index: NextPage = () => {
                     <p className="mt-2 font-medium text-gray-600">Students</p>
                 </div>
             </div>
-        </>
+        </div>
     )
 }
 

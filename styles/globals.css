@@ -2,7 +2,24 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+    font-family: 'TUV Montserrat';
+    src: url('fonts/TUVMontserrat.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'TUV Montserrat';
+    src: url('fonts/TUVMontserrat-Bold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+
 body {
     @apply bg-gray-200;
-    font-family: 'Noto Sans', sans-serif;
+    font-family: 'TUV Montserrat', sans-serif;
 }
