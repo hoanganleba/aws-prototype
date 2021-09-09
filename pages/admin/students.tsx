@@ -2,11 +2,40 @@ import type {NextPage} from 'next'
 import AdminLayout from 'components/Layouts/AdminLayout'
 import Link from "next/link";
 import {DataStore} from '@aws-amplify/datastore'
-import {User} from 'src/models'
-import {useEffect, useState} from 'react'
+import {Role, User} from 'src/models'
+import {Fragment, useEffect, useState} from 'react'
+import {Dialog, Transition} from "@headlessui/react";
 
 const Students: NextPage = () => {
     const [students, setStudents] = useState<Array<any>>([])
+    const [isOpen, setIsOpen] = useState<boolean>(false)
+    const [name, setName] = useState<string>('')
+    const [email, setEmail] = useState<string>('')
+    const [password, setPassword] = useState<string>('')
+    const [phoneNum, setPhoneNum] = useState<string>('')
+
+    const closeModal = () => {
+        setIsOpen(false)
+    }
+
+    const openModal = () => {
+        setIsOpen(true)
+    }
+
+    const addStudent = async () => {
+        const studentRole = await DataStore.query(Role, '3')
+        await DataStore.save(
+            new User({
+                name,
+                email,
+                password,
+                phoneNum,
+                role: studentRole
+            })
+        );
+        closeModal()
+    }
+
     const getStudents = async () => {
         const studentModel = await DataStore.query(User)
         setStudents(studentModel.filter(data => data.role?.name === 'Student'))
@@ -20,7 +49,7 @@ const Students: NextPage = () => {
     }, [])
 
     return (
-        <>
+        <div className="container mx-4">
             <div className="mt-11 flex justify-between mb-6">
                 <h2 className="text-2xl text-gray-800 font-semibold">Student</h2>
                 <div className="text-sm flex items-center font-medium">
@@ -48,7 +77,7 @@ const Students: NextPage = () => {
                                   d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
                         </svg>
                     </div>
-                    <button className="py-2 px-5 font-medium bg-blue-500 text-white rounded-full flex items-center">
+                    <button type='button' onClick={openModal} className="py-2 px-5 font-medium bg-blue-500 text-white rounded-full flex items-center">
                         <span className="mr-2">Add Student</span>
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24"
                              stroke="currentColor">
@@ -56,6 +85,71 @@ const Students: NextPage = () => {
                                   d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"/>
                         </svg>
                     </button>
+                    <Transition appear show={isOpen} as={Fragment}>
+                        <Dialog
+                            as="div"
+                            className="fixed inset-0 z-10 overflow-y-auto"
+                            onClose={closeModal}
+                        >
+                            <div className="min-h-screen px-4 text-center">
+                                <Dialog.Overlay className="fixed inset-0 bg-black opacity-30"/>
+                                {/* This element is to trick the browser into centering the modal contents. */}
+                                <span
+                                    className="inline-block h-screen align-middle"
+                                    aria-hidden="true"
+                                >
+                                    &#8203;
+                                </span>
+                                <Transition.Child
+                                    as={Fragment}
+                                    enter="ease-out duration-300"
+                                    enterFrom="opacity-0 scale-95"
+                                    enterTo="opacity-100 scale-100"
+                                    leave="ease-in duration-200"
+                                    leaveFrom="opacity-100 scale-100"
+                                    leaveTo="opacity-0 scale-95"
+                                >
+                                    <div
+                                        className="inline-block w-full max-w-md p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-2xl">
+                                        <Dialog.Title
+                                            as="h3"
+                                            className="text-lg font-medium leading-6 text-gray-900"
+                                        >
+                                            Add Student
+                                        </Dialog.Title>
+                                        <div className="my-6">
+                                            <input
+                                                onChange={(e) => setName(e.target.value)}
+                                                className="block w-full bg-gray-100 mb-5 font-medium py-2.5 px-4 rounded-2xl placeholder-gray-500"
+                                                aria-label="name" placeholder="Full Name"/>
+                                            <input
+                                                onChange={(e) => setPhoneNum(e.target.value)}
+                                                className="block w-full bg-gray-100 mb-5 font-medium py-2.5 px-4 rounded-2xl placeholder-gray-500"
+                                                aria-label="phoneNum" placeholder="Phone number"/>
+                                            <input
+                                                onChange={(e) => setEmail(e.target.value)}
+                                                className="block w-full bg-gray-100 mb-5 font-medium py-2.5 px-4 rounded-2xl placeholder-gray-500"
+                                                aria-label="email" placeholder="Email Address"/>
+                                            <input
+                                                onChange={(e) => setPassword(e.target.value)}
+                                                className="block w-full bg-gray-100 mb-5 font-medium py-2.5 px-4 rounded-2xl placeholder-gray-500"
+                                                aria-label="password" placeholder="Password"/>
+                                        </div>
+
+                                        <div className="mt-4">
+                                            <button
+                                                type="button"
+                                                className="inline-flex py-2 px-5 font-medium bg-blue-500 text-white rounded-full flex items-center"
+                                                onClick={addStudent}
+                                            >
+                                                Add
+                                            </button>
+                                        </div>
+                                    </div>
+                                </Transition.Child>
+                            </div>
+                        </Dialog>
+                    </Transition>
                 </div>
                 <table className="min-w-full divide-y divide-gray-200">
                     <thead className="bg-gray-100">
@@ -124,7 +218,7 @@ const Students: NextPage = () => {
                     </tbody>
                 </table>
             </div>
-        </>
+        </div>
     )
 }
 

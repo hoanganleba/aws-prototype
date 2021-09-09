@@ -48,8 +48,8 @@ const Teachers: NextPage = () => {
         })
     }, [])
     return (
-        <>
-            <div className="mt-11 flex justify-between mb-6">
+        <div className="container mx-4">
+            <div className="mt-11 flex max-w-5xl justify-between mb-6">
                 <h2 className="text-2xl text-gray-800 font-semibold">Teacher</h2>
                 <div className="text-sm flex items-center font-medium">
                     <Link href="/admin">
@@ -63,7 +63,7 @@ const Teachers: NextPage = () => {
                     <p className="text-blue-500">Teacher</p>
                 </div>
             </div>
-            <div className="rounded-2xl bg-white p-5">
+            <div className="rounded-2xl max-w-6xl bg-white p-5">
                 <div className="flex items-center mb-8 justify-between">
                     <div className="bg-gray-100 flex items-center py-2.5 px-4 rounded-2xl block text-gray-500">
                         <input
@@ -222,7 +222,7 @@ const Teachers: NextPage = () => {
                     </tbody>
                 </table>
             </div>
-        </>
+        </div>
     )
 }
 
