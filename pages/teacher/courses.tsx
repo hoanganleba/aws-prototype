@@ -1,20 +1,37 @@
 import type {NextPage} from 'next'
-import AdminLayout from 'components/Layouts/AdminLayout'
-import Link from 'next/link'
-import {useEffect, useState, Fragment} from 'react'
-import {DataStore} from '@aws-amplify/datastore'
-import {Role, Teacher, User} from 'src/models'
-import {Dialog, Transition} from '@headlessui/react'
-import Image from "next/image";
-import profilePic from "../../public/Path_2.png";
+import Link from "next/link";
+import TeacherLayout from "components/Layouts/TeacherLayout";
+import {Fragment, useEffect, useState} from "react";
+import {Dialog, Transition} from "@headlessui/react";
+import {DataStore} from "@aws-amplify/datastore";
+import {Course} from "src/models";
+import { useRouter } from 'next/router'
 
-const Teachers: NextPage = () => {
-    const [teachers, setTeachers] = useState<Array<any>>([])
+const Courses: NextPage = () => {
     const [isOpen, setIsOpen] = useState<boolean>(false)
+    const [courses, setCourses] = useState<Array<any>>([])
+    const [code, setCode] = useState<string>('')
     const [name, setName] = useState<string>('')
-    const [email, setEmail] = useState<string>('')
-    const [password, setPassword] = useState<string>('')
-    const [phoneNum, setPhoneNum] = useState<string>('')
+
+    const addCourse = async () => {
+        await DataStore.save(
+            new Course({
+                name,
+                code,
+            })
+        )
+        closeModal()
+    }
+
+    const getCourses = async () => {
+        const courseModel = await DataStore.query(Course)
+        setCourses(courseModel)
+    }
+
+    const deleteCourse = async (id: any) => {
+        const courseModelToDelete: any = await DataStore.query(Course, id);
+        await DataStore.delete(courseModelToDelete);
+    }
 
     const closeModal = () => {
         setIsOpen(false)
@@ -24,47 +41,19 @@ const Teachers: NextPage = () => {
         setIsOpen(true)
     }
 
-    const addTeacher = async () => {
-        const teacherRole = await DataStore.query(Role, '2')
-        const newTeacher = await DataStore.save(
-            new User({
-                name,
-                email,
-                password,
-                phoneNum,
-                role: teacherRole
-            })
-        )
-        await DataStore.save(
-            new Teacher({
-                user: newTeacher
-            })
-        )
-        closeModal()
-    }
-
-    const getTeachers = async () => {
-        const teacherModel = await DataStore.query(User)
-        setTeachers(teacherModel.filter(data => data.role?.name === 'Teacher'))
-    }
-
-    const deleteTeacher = async (id: any) => {
-        const teacherModelToDelete: any = await DataStore.query(User, id);
-        await DataStore.delete(teacherModelToDelete);
-    }
-
     useEffect(() => {
-        getTeachers()
-        DataStore.observe(User).subscribe(() => {
-            getTeachers()
+        getCourses()
+        DataStore.observe(Course).subscribe(() => {
+            getCourses()
         })
     }, [])
+
     return (
-        <div className="mx-2 mb-8">
+        <div className="mx-2">
             <div className="mt-11 mx-4 flex justify-between items-end mb-6">
-                <h2 className="text-4xl text-gray-800 font-semibold">Teacher</h2>
+                <h2 className="text-4xl text-gray-800 font-semibold">Courses</h2>
                 <div className="text-sm flex items-center font-medium">
-                    <Link href={"/admin"}>
+                    <Link href={"/teacher"}>
                         <a className="text-gray-600">Dashboard</a>
                     </Link>
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-2 w-2 mx-2" fill="none" viewBox="0 0 24 24"
@@ -72,14 +61,14 @@ const Teachers: NextPage = () => {
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
                               d="M13 5l7 7-7 7M5 5l7 7-7 7"/>
                     </svg>
-                    <p className="text-blue-500">Teacher</p>
+                    <p className="text-blue-500">Courses</p>
                 </div>
             </div>
-            <div className="rounded-2xl max-w-6xl bg-white p-5">
+            <div className="rounded-2xl bg-white p-5">
                 <div className="flex items-center mb-8 justify-between">
                     <div className="bg-gray-100 flex items-center py-2.5 px-4 rounded-2xl block text-gray-500">
                         <input
-                            className="focus:outline-none placeholder-gray-500 w-full font-medium focus:outline-none bg-transparent"
+                            className="placeholder-gray-500 w-full font-medium focus:outline-none bg-transparent"
                             aria-label="search" placeholder="Search"/>
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 ml-auto" fill="none"
                              viewBox="0 0 24 24"
@@ -88,15 +77,13 @@ const Teachers: NextPage = () => {
                                   d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
                         </svg>
                     </div>
-                    <button
-                        type="button"
-                        onClick={openModal}
-                        className="py-2 px-5 font-medium bg-blue-500 text-white rounded-full flex items-center">
-                        <span className="mr-2">Add Teacher</span>
-                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                    <button onClick={openModal}
+                            className="py-2 px-5 font-medium bg-blue-500 text-white rounded-full flex items-center">
+                        <span className="mr-2">Add Courses</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24"
                              stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
-                                  d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"/>
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"
+                                  d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
                         </svg>
                     </button>
                     <Transition appear show={isOpen} as={Fragment}>
@@ -129,32 +116,24 @@ const Teachers: NextPage = () => {
                                             as="h3"
                                             className="text-lg font-medium leading-6 text-gray-900 font-bold"
                                         >
-                                            Add Teacher
+                                            Add Courses
                                         </Dialog.Title>
                                         <div className="my-6">
                                             <input
                                                 onChange={(e) => setName(e.target.value)}
                                                 className="focus:outline-none block w-full bg-gray-100 mb-5 font-medium py-2.5 px-4 rounded-2xl placeholder-gray-500"
-                                                aria-label="name" placeholder="Full Name"/>
+                                                aria-label="courseName" placeholder="Courses Name"/>
                                             <input
-                                                onChange={(e) => setPhoneNum(e.target.value)}
+                                                onChange={(e) => setCode(e.target.value)}
                                                 className="focus:outline-none block w-full bg-gray-100 mb-5 font-medium py-2.5 px-4 rounded-2xl placeholder-gray-500"
-                                                aria-label="phoneNum" placeholder="Phone number"/>
-                                            <input
-                                                onChange={(e) => setEmail(e.target.value)}
-                                                className="focus:outline-none block w-full bg-gray-100 mb-5 font-medium py-2.5 px-4 rounded-2xl placeholder-gray-500"
-                                                aria-label="email" placeholder="Email Address"/>
-                                            <input
-                                                onChange={(e) => setPassword(e.target.value)}
-                                                className="focus:outline-none block w-full bg-gray-100 mb-5 font-medium py-2.5 px-4 rounded-2xl placeholder-gray-500"
-                                                aria-label="password" placeholder="Password"/>
+                                                aria-label="courseCode" placeholder="Courses Code"/>
                                         </div>
 
                                         <div className="mt-4">
                                             <button
+                                                onClick={addCourse}
                                                 type="button"
                                                 className="inline-flex py-2 px-5 font-medium bg-blue-500 text-white rounded-full flex items-center"
-                                                onClick={addTeacher}
                                             >
                                                 Add
                                             </button>
@@ -170,11 +149,11 @@ const Teachers: NextPage = () => {
                     <tr>
                         <th scope="col"
                             className="font-medium px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            Name
+                            Class Name
                         </th>
                         <th scope="col"
                             className="font-medium px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            Phone Number
+                            Class code
                         </th>
                         <th scope="col">
                             <span
@@ -186,32 +165,24 @@ const Teachers: NextPage = () => {
                     </thead>
                     <tbody className="bg-white divide-y divide-gray-200">
                     {
-                        teachers.map(teacher => (
-                            <tr key={teacher.id}>
+                        courses.map(course => (
+                            <tr key={course.id}>
                                 <td className="px-6 py-4 whitespace-nowrap">
                                     <div className="flex items-center">
-                                        <div className="flex-shrink-0 h-10 w-10">
-                                            <Image className="rounded-full" src={profilePic}
-                                                   alt="Picture of the author"/>
-                                        </div>
-                                        <div className="ml-4">
-                                            <div className="text-sm font-medium text-gray-900">
-                                                {teacher.name}
-                                            </div>
-                                            <div className="text-sm text-gray-500">
-                                                {teacher.email}
-                                            </div>
+                                        <div className="text-sm font-medium text-gray-900">
+                                            {course.name}
                                         </div>
                                     </div>
                                 </td>
                                 <td className="px-6 py-4 whitespace-nowrap">
-                                    <div className="text-sm text-gray-900">
-                                        {teacher.phoneNum}
-                                    </div>
+                                    <div className="text-sm text-gray-900">{course.code}</div>
                                 </td>
-                                <td className="px-6 py-4 flex justify-center">
+                                <td className="px-6 py-4 flex justify-center items-center">
+                                    <Link href={`/teacher/enrollments/${course.id}`}>
+                                       <a className="text-sm text-blue-500">Enrollments</a>
+                                    </Link>
                                     <div
-                                        className="text-white bg-blue-500 rounded-full mr-3 h-10 w-10 flex items-center justify-center">
+                                        className="text-white bg-blue-500 rounded-full mx-3 h-10 w-10 flex items-center justify-center">
                                         <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none"
                                              viewBox="0 0 24 24" stroke="currentColor">
                                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
@@ -219,7 +190,7 @@ const Teachers: NextPage = () => {
                                         </svg>
                                     </div>
                                     <button
-                                        onClick={() => deleteTeacher(teacher.id)}
+                                        onClick={() => deleteCourse(course.id)}
                                         className="text-white bg-red-500 rounded-full mr-3 h-10 w-10 flex items-center justify-center">
                                         <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none"
                                              viewBox="0 0 24 24" stroke="currentColor">
@@ -242,16 +213,16 @@ export async function getStaticProps() {
     return {
         props: {
             protected: true,
-            userTypes: ['Admin']
+            userTypes: ['Teacher']
         }
     };
 }
 
 // @ts-ignore
-Teachers.getLayout = (page: any) => (
-    <AdminLayout>
+Courses.getLayout = (page: any) => (
+    <TeacherLayout>
         {page}
-    </AdminLayout>
+    </TeacherLayout>
 )
 
-export default Teachers
+export default Courses
