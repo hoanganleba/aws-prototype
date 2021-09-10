@@ -39,6 +39,15 @@ const Index: NextPage = () => {
     )
 }
 
+export async function getStaticProps() {
+    return {
+        props: {
+            protected: true,
+            userTypes: ['Admin']
+        }
+    };
+}
+
 // @ts-ignore
 Index.getLayout = (page: any) => (
     <AdminLayout>

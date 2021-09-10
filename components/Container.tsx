@@ -1,10 +1,12 @@
 import {Menu, Transition} from "@headlessui/react";
 import Image from "next/image";
-import profilePic from "../public/Path_2.png";
-import {Fragment} from "react";
-import Link from "next/link";
+import profilePic from "public/Path_2.png";
+import {Fragment, useContext} from "react";
+import UserContext from "context/UserContext";
 
 const Container = ({children}: any) => {
+    const {logout} = useContext(UserContext)
+
     return (
         <div className="h-full w-screen mx-4">
             <div className="max-w-6xl mx-auto mt-9">
@@ -65,17 +67,16 @@ const Container = ({children}: any) => {
                                 </Menu.Item>
                                 <Menu.Item>
                                     {({active}) => (
-                                        <Link href={"/login"}>
-                                            <a className={`flex items-center my-2 py-2 px-3 ${active && 'bg-blue-500 rounded-lg text-white'}`}>
-                                                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6"
-                                                     fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                    <path strokeLinecap="round" strokeLinejoin="round"
-                                                          strokeWidth="1.5"
-                                                          d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/>
-                                                </svg>
-                                                <div className="font-medium ml-3">Logout</div>
-                                            </a>
-                                        </Link>
+                                        <button onClick={logout}
+                                           className={`flex items-center my-2 py-2 px-3 w-full ${active && 'bg-blue-500 rounded-lg text-white'}`}>
+                                            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6"
+                                                 fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path strokeLinecap="round" strokeLinejoin="round"
+                                                      strokeWidth="1.5"
+                                                      d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/>
+                                            </svg>
+                                            <div className="font-medium ml-3">Logout</div>
+                                        </button>
                                     )}
                                 </Menu.Item>
                             </Menu.Items>

@@ -11,16 +11,15 @@ const Register: NextPage = () => {
     const [phoneNum, setPhoneNum] = useState<string>('')
     const register = async () => {
         const adminRole = await DataStore.query(Role, '1')
-        const response = await DataStore.save(
+        await DataStore.save(
             new User({
                 name,
                 email,
                 password,
                 phoneNum,
-                Role: adminRole
+                role: adminRole
             })
         );
-        console.log(response)
     }
     return (
         <>
@@ -29,26 +28,26 @@ const Register: NextPage = () => {
                     <h4 className="font-semibold text-4xl text-center">Sign Up</h4>
                     <div className="flex justify-center my-6">
                         <h6 className="font-medium mr-4">Already an user?</h6>
-                        <Link href="/login">
+                        <Link href="/">
                             <a className="text-blue-500 font-medium">Sign In</a>
                         </Link>
                     </div>
                     <form>
                         <input
                             onChange={(e) => setName(e.target.value)}
-                            className="block w-full bg-gray-100 mb-5 font-medium py-2.5 px-4 rounded-2xl placeholder-gray-500"
+                            className="focus:outline-none block w-full bg-gray-100 mb-5 font-medium py-2.5 px-4 rounded-2xl placeholder-gray-500"
                             aria-label="name" placeholder="Full Name"/>
                         <input
                             onChange={(e) => setPhoneNum(e.target.value)}
-                            className="block w-full bg-gray-100 mb-5 font-medium py-2.5 px-4 rounded-2xl placeholder-gray-500"
+                            className="focus:outline-none block w-full bg-gray-100 mb-5 font-medium py-2.5 px-4 rounded-2xl placeholder-gray-500"
                             aria-label="phoneNum" placeholder="Phone number"/>
                         <input
                             onChange={(e) => setEmail(e.target.value)}
-                            className="block w-full bg-gray-100 mb-5 font-medium py-2.5 px-4 rounded-2xl placeholder-gray-500"
+                            className="focus:outline-none block w-full bg-gray-100 mb-5 font-medium py-2.5 px-4 rounded-2xl placeholder-gray-500"
                             aria-label="email" placeholder="Email Address"/>
                         <input
                             onChange={(e) => setPassword(e.target.value)}
-                            className="block w-full bg-gray-100 mb-5 font-medium py-2.5 px-4 rounded-2xl placeholder-gray-500"
+                            className="focus:outline-none block w-full bg-gray-100 mb-5 font-medium py-2.5 px-4 rounded-2xl placeholder-gray-500"
                             aria-label="password" placeholder="Password"/>
                         <a onClick={register}
                            className="block bg-blue-500 rounded-full py-3 px-6 text-center font-medium text-white">

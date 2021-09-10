@@ -112,6 +112,15 @@ const Chat: NextPage = () => {
     )
 }
 
+export async function getStaticProps() {
+    return {
+        props: {
+            protected: true,
+            userTypes: ['Admin']
+        }
+    };
+}
+
 // @ts-ignore
 Chat.getLayout = (page: any) => (
     <AdminLayout>

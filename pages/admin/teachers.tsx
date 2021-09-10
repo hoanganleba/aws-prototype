@@ -67,7 +67,7 @@ const Teachers: NextPage = () => {
                 <div className="flex items-center mb-8 justify-between">
                     <div className="bg-gray-100 flex items-center py-2.5 px-4 rounded-2xl block text-gray-500">
                         <input
-                            className="placeholder-gray-500 w-full font-medium focus:outline-none bg-transparent"
+                            className="focus:outline-none placeholder-gray-500 w-full font-medium focus:outline-none bg-transparent"
                             aria-label="search" placeholder="Search"/>
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 ml-auto" fill="none"
                              viewBox="0 0 24 24"
@@ -122,19 +122,19 @@ const Teachers: NextPage = () => {
                                         <div className="my-6">
                                             <input
                                                 onChange={(e) => setName(e.target.value)}
-                                                className="block w-full bg-gray-100 mb-5 font-medium py-2.5 px-4 rounded-2xl placeholder-gray-500 focus:outline-none focus:ring focus:ring-blue-600"
+                                                className="focus:outline-none block w-full bg-gray-100 mb-5 font-medium py-2.5 px-4 rounded-2xl placeholder-gray-500"
                                                 aria-label="name" placeholder="Full Name"/>
                                             <input
                                                 onChange={(e) => setPhoneNum(e.target.value)}
-                                                className="block w-full bg-gray-100 mb-5 font-medium py-2.5 px-4 rounded-2xl placeholder-gray-500 focus:outline-none focus:ring focus:ring-blue-600"
+                                                className="focus:outline-none block w-full bg-gray-100 mb-5 font-medium py-2.5 px-4 rounded-2xl placeholder-gray-500"
                                                 aria-label="phoneNum" placeholder="Phone number"/>
                                             <input
                                                 onChange={(e) => setEmail(e.target.value)}
-                                                className="block w-full bg-gray-100 mb-5 font-medium py-2.5 px-4 rounded-2xl placeholder-gray-500 focus:outline-none focus:ring focus:ring-blue-600"
+                                                className="focus:outline-none block w-full bg-gray-100 mb-5 font-medium py-2.5 px-4 rounded-2xl placeholder-gray-500"
                                                 aria-label="email" placeholder="Email Address"/>
                                             <input
                                                 onChange={(e) => setPassword(e.target.value)}
-                                                className="block w-full bg-gray-100 mb-5 font-medium py-2.5 px-4 rounded-2xl placeholder-gray-500 focus:outline-none focus:ring focus:ring-blue-600"
+                                                className="focus:outline-none block w-full bg-gray-100 mb-5 font-medium py-2.5 px-4 rounded-2xl placeholder-gray-500"
                                                 aria-label="password" placeholder="Password"/>
                                         </div>
 
@@ -224,6 +224,15 @@ const Teachers: NextPage = () => {
             </div>
         </div>
     )
+}
+
+export async function getStaticProps() {
+    return {
+        props: {
+            protected: true,
+            userTypes: ['Admin']
+        }
+    };
 }
 
 // @ts-ignore
