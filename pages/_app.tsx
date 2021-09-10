@@ -34,11 +34,12 @@ function MyApp({Component, pageProps}: AppLayoutProps) {
         } else {
             router.push('/');
         }
+
         if (pageProps.protected && !userType) {
             router.push('/')
         }
-    }, [])
 
+    }, [])
 
     if (
         pageProps.protected &&

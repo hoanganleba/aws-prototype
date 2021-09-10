@@ -3,8 +3,11 @@ import AdminLayout from 'components/Layouts/AdminLayout'
 import Link from 'next/link'
 import {useEffect, useState, Fragment} from 'react'
 import {DataStore} from '@aws-amplify/datastore'
-import {Role, User} from 'src/models'
+import {Role, Teacher, User} from 'src/models'
 import {Dialog, Transition} from '@headlessui/react'
+import Image from "next/image";
+import profilePic from "../../public/Path_2.png";
+import {deleteTeacher} from "../../src/graphql/mutations";
 
 const Teachers: NextPage = () => {
     const [teachers, setTeachers] = useState<Array<any>>([])
@@ -24,7 +27,7 @@ const Teachers: NextPage = () => {
 
     const addTeacher = async () => {
         const teacherRole = await DataStore.query(Role, '2')
-        await DataStore.save(
+        const newTeacher = await DataStore.save(
             new User({
                 name,
                 email,
@@ -32,13 +35,23 @@ const Teachers: NextPage = () => {
                 phoneNum,
                 role: teacherRole
             })
-        );
+        )
+        await DataStore.save(
+            new Teacher({
+                user: newTeacher
+            })
+        )
         closeModal()
     }
 
     const getTeachers = async () => {
         const teacherModel = await DataStore.query(User)
         setTeachers(teacherModel.filter(data => data.role?.name === 'Teacher'))
+    }
+
+    const deleteTeacher = async (id: any) => {
+        const teacherModelToDelete: any = await DataStore.query(User, id);
+        await DataStore.delete(teacherModelToDelete);
     }
 
     useEffect(() => {
@@ -48,11 +61,17 @@ const Teachers: NextPage = () => {
         })
     }, [])
     return (
+<<<<<<< HEAD
         <div className="mx-2">
             <div className="mt-11 mx-4 flex justify-between items-end mb-6">
                 <h2 className="text-4xl text-gray-800 font-semibold">Teacher</h2>
+=======
+        <div className="container mx-4">
+            <div className="mt-11 flex justify-between mb-6">
+                <h2 className="text-2xl text-gray-800 font-semibold">Teacher</h2>
+>>>>>>> main
                 <div className="text-sm flex items-center font-medium">
-                    <Link href="/admin">
+                    <Link href={"/admin"}>
                         <a className="text-gray-600">Dashboard</a>
                     </Link>
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-2 w-2 mx-2" fill="none" viewBox="0 0 24 24"
@@ -179,9 +198,8 @@ const Teachers: NextPage = () => {
                                 <td className="px-6 py-4 whitespace-nowrap">
                                     <div className="flex items-center">
                                         <div className="flex-shrink-0 h-10 w-10">
-                                            <img className="h-10 w-10 rounded-full"
-                                                 src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60"
-                                                 alt="image"/>
+                                            <Image className="rounded-full" src={profilePic}
+                                                   alt="Picture of the author"/>
                                         </div>
                                         <div className="ml-4">
                                             <div className="text-sm font-medium text-gray-900">
@@ -207,14 +225,15 @@ const Teachers: NextPage = () => {
                                                   d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
                                         </svg>
                                     </div>
-                                    <div
+                                    <button
+                                        onClick={() => deleteTeacher(teacher.id)}
                                         className="text-white bg-red-500 rounded-full mr-3 h-10 w-10 flex items-center justify-center">
                                         <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none"
                                              viewBox="0 0 24 24" stroke="currentColor">
                                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
                                                   d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
                                         </svg>
-                                    </div>
+                                    </button>
                                 </td>
                             </tr>
                         ))

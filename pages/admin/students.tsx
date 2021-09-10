@@ -2,9 +2,11 @@ import type {NextPage} from 'next'
 import AdminLayout from 'components/Layouts/AdminLayout'
 import Link from "next/link";
 import {DataStore} from '@aws-amplify/datastore'
-import {Role, User} from 'src/models'
+import {Role, User, Student} from 'src/models'
 import {Fragment, useEffect, useState} from 'react'
 import {Dialog, Transition} from "@headlessui/react";
+import Image from "next/image";
+import profilePic from "public/Path_2.png";
 
 const Students: NextPage = () => {
     const [students, setStudents] = useState<Array<any>>([])
@@ -24,7 +26,7 @@ const Students: NextPage = () => {
 
     const addStudent = async () => {
         const studentRole = await DataStore.query(Role, '3')
-        await DataStore.save(
+        const newStudent = await DataStore.save(
             new User({
                 name,
                 email,
@@ -32,13 +34,23 @@ const Students: NextPage = () => {
                 phoneNum,
                 role: studentRole
             })
-        );
+        )
+        await DataStore.save(
+            new Student({
+                user: newStudent
+            })
+        )
         closeModal()
     }
 
     const getStudents = async () => {
         const studentModel = await DataStore.query(User)
         setStudents(studentModel.filter(data => data.role?.name === 'Student'))
+    }
+
+    const deleteStudent = async (id: any) => {
+        const studentModelToDelete: any = await DataStore.query(User, id);
+        await DataStore.delete(studentModelToDelete);
     }
 
     useEffect(() => {
@@ -53,7 +65,7 @@ const Students: NextPage = () => {
             <div className="mt-11 mx-4 flex justify-between items-end mb-6">
                 <h2 className="text-4xl text-gray-800 font-semibold">Student</h2>
                 <div className="text-sm flex items-center font-medium">
-                    <Link href="/admin">
+                    <Link href={"/admin"}>
                         <a className="text-gray-600">Dashboard</a>
                     </Link>
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-2 w-2 mx-2" fill="none" viewBox="0 0 24 24"
@@ -77,7 +89,8 @@ const Students: NextPage = () => {
                                   d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
                         </svg>
                     </div>
-                    <button type='button' onClick={openModal} className="py-2 px-5 font-medium bg-blue-500 text-white rounded-full flex items-center">
+                    <button type='button' onClick={openModal}
+                            className="py-2 px-5 font-medium bg-blue-500 text-white rounded-full flex items-center">
                         <span className="mr-2">Add Student</span>
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24"
                              stroke="currentColor">
@@ -120,19 +133,19 @@ const Students: NextPage = () => {
                                         <div className="my-6">
                                             <input
                                                 onChange={(e) => setName(e.target.value)}
-                                                className="block w-full bg-gray-100 mb-5 font-medium py-2.5 px-4 rounded-2xl placeholder-gray-500 focus:outline-none focus:ring focus:ring-blue-600"
+                                                className="focus:outline-none block w-full bg-gray-100 mb-5 font-medium py-2.5 px-4 rounded-2xl placeholder-gray-500"
                                                 aria-label="name" placeholder="Full Name"/>
                                             <input
                                                 onChange={(e) => setPhoneNum(e.target.value)}
-                                                className="block w-full bg-gray-100 mb-5 font-medium py-2.5 px-4 rounded-2xl placeholder-gray-500 focus:outline-none focus:ring focus:ring-blue-600"
+                                                className="focus:outline-none block w-full bg-gray-100 mb-5 font-medium py-2.5 px-4 rounded-2xl placeholder-gray-500"
                                                 aria-label="phoneNum" placeholder="Phone number"/>
                                             <input
                                                 onChange={(e) => setEmail(e.target.value)}
-                                                className="block w-full bg-gray-100 mb-5 font-medium py-2.5 px-4 rounded-2xl placeholder-gray-500 focus:outline-none focus:ring focus:ring-blue-600"
+                                                className="focus:outline-none block w-full bg-gray-100 mb-5 font-medium py-2.5 px-4 rounded-2xl placeholder-gray-500"
                                                 aria-label="email" placeholder="Email Address"/>
                                             <input
                                                 onChange={(e) => setPassword(e.target.value)}
-                                                className="block w-full bg-gray-100 mb-5 font-medium py-2.5 px-4 rounded-2xl placeholder-gray-500 focus:outline-none focus:ring focus:ring-blue-600"
+                                                className="focus:outline-none block w-full bg-gray-100 mb-5 font-medium py-2.5 px-4 rounded-2xl placeholder-gray-500"
                                                 aria-label="password" placeholder="Password"/>
                                         </div>
 
@@ -177,9 +190,8 @@ const Students: NextPage = () => {
                                 <td className="px-6 py-4 whitespace-nowrap">
                                     <div className="flex items-center">
                                         <div className="flex-shrink-0 h-10 w-10">
-                                            <img className="h-10 w-10 rounded-full"
-                                                 src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60"
-                                                 alt="image"/>
+                                            <Image className="rounded-full" src={profilePic}
+                                                   alt="Picture of the author"/>
                                         </div>
                                         <div className="ml-4">
                                             <div className="text-sm font-medium text-gray-900">
@@ -203,14 +215,15 @@ const Students: NextPage = () => {
                                                   d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
                                         </svg>
                                     </div>
-                                    <div
+                                    <button
+                                        onClick={() => deleteStudent(student.id)}
                                         className="text-white bg-red-500 rounded-full mr-3 h-10 w-10 flex items-center justify-center">
                                         <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none"
                                              viewBox="0 0 24 24" stroke="currentColor">
                                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
                                                   d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
                                         </svg>
-                                    </div>
+                                    </button>
                                 </td>
                             </tr>
                         ))

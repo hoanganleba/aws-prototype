@@ -3,6 +3,7 @@ import StudentLayout from 'components/Layouts/StudentLayout'
 
 const Index: NextPage = () => {
     return (
+<<<<<<< HEAD
         <div className="mx-2">
             <h2 className="text-4xl mx-4 text-gray-800 font-semibold mt-11 mb-6">Dashboard</h2>
             <div className="grid grid-cols-4 gap-x-6">
@@ -17,6 +18,11 @@ const Index: NextPage = () => {
                 </div>
             </div>
         </div>
+=======
+        <>
+            <h2 className="text-2xl text-gray-800 font-semibold mt-11 mb-6">Dashboard</h2>
+        </>
+>>>>>>> main
     )
 }
 
