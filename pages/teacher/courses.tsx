@@ -5,7 +5,6 @@ import {Fragment, useEffect, useState} from "react";
 import {Dialog, Transition} from "@headlessui/react";
 import {DataStore} from "@aws-amplify/datastore";
 import {Course} from "src/models";
-import { useRouter } from 'next/router'
 
 const Courses: NextPage = () => {
     const [isOpen, setIsOpen] = useState<boolean>(false)
