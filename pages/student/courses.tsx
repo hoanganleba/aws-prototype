@@ -1,8 +1,28 @@
 import type {NextPage} from 'next'
 import Link from "next/link";
 import StudentLayout from "components/Layouts/StudentLayout";
+import {useEffect, useState} from "react";
+import {API} from 'aws-amplify';
+import * as queries from 'src/graphql/queries';
 
-const Course: NextPage = () => {
+const Courses: NextPage = () => {
+    const [enrollmentCourses, setEnrollmentCourses] = useState([])
+    let filter = {
+        studentID: {
+            eq: '3e6b08ea-baa9-458f-aa13-bdd96438a2f6'
+        }
+    };
+
+    const getStudent = async () => {
+        const students = await API.graphql({
+            query: queries.listEnrolments,
+            variables: {filter: filter}
+        })
+        setEnrollmentCourses(students.data?.listEnrolments.items)
+    }
+    useEffect(() => {
+        getStudent()
+    }, [])
     return (
         <div className="mx-2 mb-8">
             <div className="mt-11 mx-4 flex justify-between items-end mb-6">
@@ -38,19 +58,11 @@ const Course: NextPage = () => {
                     <tr>
                         <th scope="col"
                             className="font-medium px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            ID
-                        </th>
-                        <th scope="col"
-                            className="font-medium px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                             Class Name
                         </th>
                         <th scope="col"
                             className="font-medium px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            Class Code
-                        </th>
-                        <th scope="col"
-                            className="font-medium px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            Status
+                            Class code
                         </th>
                         <th scope="col">
                             <span
@@ -61,43 +73,27 @@ const Course: NextPage = () => {
                     </tr>
                     </thead>
                     <tbody className="bg-white divide-y divide-gray-200">
-                    <tr>
-                        <td className="px-6 py-4 whitespace-nowrap">1</td>
-                        <td className="px-6 py-4 whitespace-nowrap">
-                            <div className="flex items-center">
-                                <div className="text-sm font-medium text-gray-900">
-                                    Intro to Mathematics
+                    {enrollmentCourses.map(enrollmentCourse => (
+                        <tr key={enrollmentCourse}>
+                            <td className="px-6 py-4 whitespace-nowrap">
+                                <div className="flex items-center">
+                                    <div className="text-sm font-medium text-gray-900">
+                                        {enrollmentCourse.course.name}
+                                    </div>
                                 </div>
-                            </div>
-                        </td>
-                        <td className="px-6 py-4 whitespace-nowrap">
-                            <div className="text-sm text-gray-900">INTR0123</div>
-                        </td>
-                        <td className="px-6 py-4 whitespace-nowrap">
-                            <span
-                                className="px-2 inline-flex text-xs leading-5 font-medium rounded-full bg-green-100 text-green-800">
-                                Active
-                            </span>
-                        </td>
-                        <td className="px-6 py-4 flex justify-center">
-                            <div
-                                className="text-white bg-blue-500 rounded-full mr-3 h-10 w-10 flex items-center justify-center">
-                                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none"
-                                     viewBox="0 0 24 24" stroke="currentColor">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
-                                          d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
-                                </svg>
-                            </div>
-                            <div
-                                className="text-white bg-red-500 rounded-full mr-3 h-10 w-10 flex items-center justify-center">
-                                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none"
-                                     viewBox="0 0 24 24" stroke="currentColor">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
-                                          d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
-                                </svg>
-                            </div>
-                        </td>
-                    </tr>
+                            </td>
+                            <td className="px-6 py-4 whitespace-nowrap">
+                                <div className="text-sm text-gray-900">
+                                    {enrollmentCourse.course.code}
+                                </div>
+                            </td>
+                            <td className="px-6 py-4 flex justify-center">
+                                <Link href={`/student`}>
+                                    <a className="text-sm text-blue-500">View</a>
+                                </Link>
+                            </td>
+                        </tr>
+                    ))}
                     </tbody>
                 </table>
             </div>
@@ -106,10 +102,10 @@ const Course: NextPage = () => {
 }
 
 // @ts-ignore
-Course.getLayout = (page: any) => (
+Courses.getLayout = (page: any) => (
     <StudentLayout>
         {page}
     </StudentLayout>
 )
 
-export default Course
+export default Courses
