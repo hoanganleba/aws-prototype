@@ -4,9 +4,9 @@ import TeacherLayout from "components/Layouts/TeacherLayout";
 
 const Course: NextPage = () => {
     return (
-        <>
-            <div className="mt-11 flex justify-between mb-6">
-                <h2 className="text-2xl text-gray-800 font-semibold">Course</h2>
+        <div className="mx-2">
+            <div className="mt-11 mx-4 flex justify-between items-end mb-6">
+                <h2 className="text-4xl text-gray-800 font-semibold">Course</h2>
                 <div className="text-sm flex items-center font-medium">
                     <Link href="/teacher">
                         <a className="text-gray-600">Dashboard</a>
@@ -50,11 +50,11 @@ const Course: NextPage = () => {
                         </th>
                         <th scope="col"
                             className="font-medium px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            Name
+                            Class Name
                         </th>
                         <th scope="col"
                             className="font-medium px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            Phone Number
+                            Class code
                         </th>
                         <th scope="col"
                             className="font-medium px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
@@ -73,24 +73,15 @@ const Course: NextPage = () => {
                         <td className="px-6 py-4 whitespace-nowrap">1</td>
                         <td className="px-6 py-4 whitespace-nowrap">
                             <div className="flex items-center">
-                                <div className="flex-shrink-0 h-10 w-10">
-                                    <img className="h-10 w-10 rounded-full"
-                                         src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60"
-                                         alt="image"/>
-                                </div>
-                                <div className="ml-4">
+                                <div>
                                     <div className="text-sm font-medium text-gray-900">
-                                        Jane Cooper
-                                    </div>
-                                    <div className="text-sm text-gray-500">
-                                        jane.cooper@example.com
+                                        Intro To Mathematics
                                     </div>
                                 </div>
                             </div>
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap">
-                            <div className="text-sm text-gray-900">Regional Paradigm Technician</div>
-                            <div className="text-sm text-gray-500">Optimization</div>
+                            <div className="text-sm text-gray-900">INTR0123</div>
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap">
                             <span
@@ -120,7 +111,7 @@ const Course: NextPage = () => {
                     </tbody>
                 </table>
             </div>
-        </>
+        </div>
     )
 }
 

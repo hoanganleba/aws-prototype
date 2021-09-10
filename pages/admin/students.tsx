@@ -49,9 +49,9 @@ const Students: NextPage = () => {
     }, [])
 
     return (
-        <div className="container mx-4">
-            <div className="mt-11 flex justify-between mb-6">
-                <h2 className="text-2xl text-gray-800 font-semibold">Student</h2>
+        <div className="mx-2">
+            <div className="mt-11 mx-4 flex justify-between items-end mb-6">
+                <h2 className="text-4xl text-gray-800 font-semibold">Student</h2>
                 <div className="text-sm flex items-center font-medium">
                     <Link href="/admin">
                         <a className="text-gray-600">Dashboard</a>
@@ -113,26 +113,26 @@ const Students: NextPage = () => {
                                         className="inline-block w-full max-w-md p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-2xl">
                                         <Dialog.Title
                                             as="h3"
-                                            className="text-lg font-medium leading-6 text-gray-900"
+                                            className="text-lg font-medium leading-6 text-gray-900 font-bold"
                                         >
                                             Add Student
                                         </Dialog.Title>
                                         <div className="my-6">
                                             <input
                                                 onChange={(e) => setName(e.target.value)}
-                                                className="block w-full bg-gray-100 mb-5 font-medium py-2.5 px-4 rounded-2xl placeholder-gray-500"
+                                                className="block w-full bg-gray-100 mb-5 font-medium py-2.5 px-4 rounded-2xl placeholder-gray-500 focus:outline-none focus:ring focus:ring-blue-600"
                                                 aria-label="name" placeholder="Full Name"/>
                                             <input
                                                 onChange={(e) => setPhoneNum(e.target.value)}
-                                                className="block w-full bg-gray-100 mb-5 font-medium py-2.5 px-4 rounded-2xl placeholder-gray-500"
+                                                className="block w-full bg-gray-100 mb-5 font-medium py-2.5 px-4 rounded-2xl placeholder-gray-500 focus:outline-none focus:ring focus:ring-blue-600"
                                                 aria-label="phoneNum" placeholder="Phone number"/>
                                             <input
                                                 onChange={(e) => setEmail(e.target.value)}
-                                                className="block w-full bg-gray-100 mb-5 font-medium py-2.5 px-4 rounded-2xl placeholder-gray-500"
+                                                className="block w-full bg-gray-100 mb-5 font-medium py-2.5 px-4 rounded-2xl placeholder-gray-500 focus:outline-none focus:ring focus:ring-blue-600"
                                                 aria-label="email" placeholder="Email Address"/>
                                             <input
                                                 onChange={(e) => setPassword(e.target.value)}
-                                                className="block w-full bg-gray-100 mb-5 font-medium py-2.5 px-4 rounded-2xl placeholder-gray-500"
+                                                className="block w-full bg-gray-100 mb-5 font-medium py-2.5 px-4 rounded-2xl placeholder-gray-500 focus:outline-none focus:ring focus:ring-blue-600"
                                                 aria-label="password" placeholder="Password"/>
                                         </div>
 

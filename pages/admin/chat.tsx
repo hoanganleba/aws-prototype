@@ -6,9 +6,9 @@ import Image from 'next/image'
 
 const Chat: NextPage = () => {
     return (
-        <>
-            <div className="mt-11 flex justify-between mb-6">
-                <h2 className="text-2xl text-gray-800 font-semibold">Chat</h2>
+        <div className="mx-2">
+            <div className="mt-11 mx-4 flex justify-between items-end mb-6">
+                <h2 className="text-4xl text-gray-800 font-semibold">Chat</h2>
                 <div className="text-sm flex items-center font-medium">
                     <Link href="/admin">
                         <a className="text-gray-600">Dashboard</a>
@@ -108,7 +108,7 @@ const Chat: NextPage = () => {
                     </div>
                 </div>
             </div>
-        </>
+        </div>
     )
 }
 

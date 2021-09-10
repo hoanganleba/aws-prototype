@@ -4,9 +4,9 @@ import StudentLayout from "components/Layouts/StudentLayout";
 
 const Course: NextPage = () => {
     return (
-        <>
-            <div className="mt-11 flex justify-between mb-6">
-                <h2 className="text-2xl text-gray-800 font-semibold">Course</h2>
+        <div className="mx-2">
+            <div className="mt-11 mx-4 flex justify-between items-end mb-6">
+                <h2 className="text-4xl text-gray-800 font-semibold">Course</h2>
                 <div className="text-sm flex items-center font-medium">
                     <Link href="/student">
                         <a className="text-gray-600">Dashboard</a>
@@ -32,14 +32,6 @@ const Course: NextPage = () => {
                                   d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
                         </svg>
                     </div>
-                    <button className="py-2 px-5 font-medium bg-blue-500 text-white rounded-full flex items-center">
-                        <span className="mr-2">Add Course</span>
-                        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24"
-                             stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"
-                                  d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
-                        </svg>
-                    </button>
                 </div>
                 <table className="min-w-full divide-y divide-gray-200">
                     <thead className="bg-gray-100">
@@ -50,11 +42,11 @@ const Course: NextPage = () => {
                         </th>
                         <th scope="col"
                             className="font-medium px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            Name
+                            Class Name
                         </th>
                         <th scope="col"
                             className="font-medium px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            Phone Number
+                            Class Code
                         </th>
                         <th scope="col"
                             className="font-medium px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
@@ -73,24 +65,15 @@ const Course: NextPage = () => {
                         <td className="px-6 py-4 whitespace-nowrap">1</td>
                         <td className="px-6 py-4 whitespace-nowrap">
                             <div className="flex items-center">
-                                <div className="flex-shrink-0 h-10 w-10">
-                                    <img className="h-10 w-10 rounded-full"
-                                         src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60"
-                                         alt="image"/>
-                                </div>
-                                <div className="ml-4">
+                                <div>
                                     <div className="text-sm font-medium text-gray-900">
-                                        Jane Cooper
-                                    </div>
-                                    <div className="text-sm text-gray-500">
-                                        jane.cooper@example.com
+                                        Intro to Mathematics
                                     </div>
                                 </div>
                             </div>
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap">
-                            <div className="text-sm text-gray-900">Regional Paradigm Technician</div>
-                            <div className="text-sm text-gray-500">Optimization</div>
+                            <div className="text-sm text-gray-900">INTR0123</div>
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap">
                             <span
@@ -120,7 +103,7 @@ const Course: NextPage = () => {
                     </tbody>
                 </table>
             </div>
-        </>
+        </div>
     )
 }
 

@@ -6,7 +6,7 @@ import Link from "next/link";
 
 const Container = ({children}: any) => {
     return (
-        <div className="h-full w-full">
+        <div className="h-full w-screen mx-4">
             <div className="max-w-6xl mx-auto mt-9">
                 <div className="flex justify-end">
                     <Menu as="div" className="relative inline-block text-left">
