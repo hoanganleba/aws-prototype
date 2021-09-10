@@ -56,9 +56,9 @@ const Enrollments: NextPage = () => {
     }, [])
 
     return (
-        <div className="mx-2">
+        <div className="mx-2 mb-8">
             <div className="mt-11 mx-4 flex justify-between items-end mb-6">
-                <h2 className="text-4xl text-gray-800 font-semibold">Enrollments</h2>
+                <h2 className="text-4xl text-gray-800 font-semibold">Enrolments</h2>
                 <div className="text-sm flex items-center font-medium">
                     <Link href={"/teacher"}>
                         <a className="text-gray-600">Dashboard</a>
@@ -76,7 +76,7 @@ const Enrollments: NextPage = () => {
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
                               d="M13 5l7 7-7 7M5 5l7 7-7 7"/>
                     </svg>
-                    <p className="text-blue-500">Enrollments</p>
+                    <p className="text-blue-500">Enrolments</p>
                 </div>
             </div>
             <div className="rounded-2xl bg-white p-5">
