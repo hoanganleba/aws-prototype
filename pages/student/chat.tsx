@@ -10,7 +10,7 @@ const Chat: NextPage = () => {
             <div className="mt-11 mx-4 flex justify-between items-end mb-6">
                 <h2 className="text-4xl text-gray-800 font-semibold">Chat</h2>
                 <div className="text-sm flex items-center font-medium">
-                    <Link href="/student">
+                    <Link href={"/student"}>
                         <a className="text-gray-600">Dashboard</a>
                     </Link>
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-2 w-2 mx-2" fill="none" viewBox="0 0 24 24"
