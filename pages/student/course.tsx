@@ -1,8 +1,6 @@
 import type {NextPage} from 'next'
 import Link from "next/link";
 import StudentLayout from "components/Layouts/StudentLayout";
-import profilePic from "../../public/Path_2.png";
-import Image from "next/image";
 
 const Course: NextPage = () => {
     return (
@@ -67,17 +65,8 @@ const Course: NextPage = () => {
                         <td className="px-6 py-4 whitespace-nowrap">1</td>
                         <td className="px-6 py-4 whitespace-nowrap">
                             <div className="flex items-center">
-<<<<<<< HEAD
-                                <div>
-=======
-                                <div className="flex-shrink-0 h-10 w-10">
-                                    <Image className="rounded-full" src={profilePic} alt="Picture of the author"/>
-                                </div>
-                                <div className="ml-4">
->>>>>>> main
-                                    <div className="text-sm font-medium text-gray-900">
-                                        Intro to Mathematics
-                                    </div>
+                                <div className="text-sm font-medium text-gray-900">
+                                    Intro to Mathematics
                                 </div>
                             </div>
                         </td>

@@ -119,6 +119,13 @@ export const schema = {
                         "associatedWith": "courseID"
                     }
                 },
+                "code": {
+                    "name": "code",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
                 "createdAt": {
                     "name": "createdAt",
                     "isArray": false,
@@ -851,5 +858,5 @@ export const schema = {
     },
     "enums": {},
     "nonModels": {},
-    "version": "441d4983ca08f4fcb0e0f28be58b9bfa"
+    "version": "6a5d45f88aa22687a8836707748da329"
 };

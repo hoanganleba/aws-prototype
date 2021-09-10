@@ -55,6 +55,7 @@ export declare class Course {
   readonly name?: string;
   readonly userID?: string;
   readonly attendances?: (Attendance | null)[];
+  readonly code?: string;
   readonly createdAt?: string;
   readonly updatedAt?: string;
   constructor(init: ModelInit<Course, CourseMetaData>);
