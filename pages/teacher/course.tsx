@@ -1,6 +1,8 @@
 import type {NextPage} from 'next'
 import Link from "next/link";
 import TeacherLayout from "components/Layouts/TeacherLayout";
+import Image from "next/image";
+import profilePic from "../../public/Path_2.png";
 
 const Course: NextPage = () => {
     return (
@@ -8,7 +10,7 @@ const Course: NextPage = () => {
             <div className="mt-11 flex justify-between mb-6">
                 <h2 className="text-2xl text-gray-800 font-semibold">Course</h2>
                 <div className="text-sm flex items-center font-medium">
-                    <Link href="/teacher">
+                    <Link href={"/teacher"}>
                         <a className="text-gray-600">Dashboard</a>
                     </Link>
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-2 w-2 mx-2" fill="none" viewBox="0 0 24 24"
@@ -74,9 +76,7 @@ const Course: NextPage = () => {
                         <td className="px-6 py-4 whitespace-nowrap">
                             <div className="flex items-center">
                                 <div className="flex-shrink-0 h-10 w-10">
-                                    <img className="h-10 w-10 rounded-full"
-                                         src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60"
-                                         alt="image"/>
+                                    <Image className="rounded-full" src={profilePic} alt="Picture of the author"/>
                                 </div>
                                 <div className="ml-4">
                                     <div className="text-sm font-medium text-gray-900">

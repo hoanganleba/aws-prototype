@@ -37,7 +37,7 @@ const Container = ({children}: any) => {
                                 <Menu.Item>
                                     {({active}) => (
                                         <a className={`flex items-center my-2 py-2 px-3 ${active && 'bg-blue-500 rounded-lg text-white'}`}
-                                           href="/profile">
+                                           href={"#"}>
                                             <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6"
                                                  fill="none"
                                                  viewBox="0 0 24 24" stroke="currentColor">
@@ -52,7 +52,7 @@ const Container = ({children}: any) => {
                                 <Menu.Item>
                                     {({active}) => (
                                         <a className={`flex items-center my-2 py-2 px-3 ${active && 'bg-blue-500 rounded-lg text-white'}`}
-                                           href="/profile">
+                                           href={"#"}>
                                             <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6"
                                                  fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                 <path strokeLinecap="round" strokeLinejoin="round"
