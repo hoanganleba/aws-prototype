@@ -181,9 +181,6 @@ const Courses: NextPage = () => {
                                     <Link href={`/teacher/enrollments/${course.id}`}>
                                        <a className="text-sm text-blue-500">Enrollments</a>
                                     </Link>
-                                    <Link href={`/teacher/attendances/${course.id}`}>
-                                        <a className="text-sm text-blue-500">Attendance</a>
-                                    </Link>
                                     <div
                                         className="text-white bg-blue-500 rounded-full mx-3 h-10 w-10 flex items-center justify-center">
                                         <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none"
