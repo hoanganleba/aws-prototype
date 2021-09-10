@@ -4,7 +4,7 @@ import Container from "../Container";
 const TeacherLayout = ({children}: any) => {
     return (
         <>
-            <div className="h-screen flex">
+            <div className="min-h-screen flex">
                 <TeacherSidebar/>
                 <Container>
                     {children}

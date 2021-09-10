@@ -61,7 +61,7 @@ const Students: NextPage = () => {
     }, [])
 
     return (
-        <div className="mx-2">
+        <div className="mx-2 mb-8">
             <div className="mt-11 mx-4 flex justify-between items-end mb-6">
                 <h2 className="text-4xl text-gray-800 font-semibold">Student</h2>
                 <div className="text-sm flex items-center font-medium">

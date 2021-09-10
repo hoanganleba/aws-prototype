@@ -8,7 +8,7 @@ const AdminSidebar = () => {
     const router = useRouter()
 
     return (
-        <div className="bg-white h-full w-56 flex-shrink-0">
+        <div className="bg-white min-h-full w-56 flex-shrink-0">
             <div className="flex justify-center mx-4 my-11">
                 <Image src={profilePic} alt="Picture of the author"/>
             </div>
