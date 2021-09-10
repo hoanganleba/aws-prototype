@@ -20,6 +20,15 @@ const Index: NextPage = () => {
     )
 }
 
+export async function getStaticProps() {
+    return {
+        props: {
+            protected: true,
+            userTypes: ['Teacher']
+        }
+    };
+}
+
 // @ts-ignore
 Index.getLayout = (page: any) => (
     <TeacherLayout>

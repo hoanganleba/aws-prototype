@@ -10,8 +10,8 @@ const Index: NextPage = () => {
 
     const getNumOfUsers = async () => {
         const userModel = await DataStore.query(User)
-        setNumOfStudents(userModel.filter(data => data.Role?.name === 'Student').length)
-        setNumOfTeachers(userModel.filter(data => data.Role?.name === 'Teacher').length)
+        setNumOfStudents(userModel.filter(data => data.role?.name === 'Student').length)
+        setNumOfTeachers(userModel.filter(data => data.role?.name === 'Teacher').length)
     }
 
     useEffect(() => {
@@ -37,6 +37,15 @@ const Index: NextPage = () => {
             </div>
         </>
     )
+}
+
+export async function getStaticProps() {
+    return {
+        props: {
+            protected: true,
+            userTypes: ['Admin']
+        }
+    };
 }
 
 // @ts-ignore

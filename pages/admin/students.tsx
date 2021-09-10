@@ -9,7 +9,7 @@ const Students: NextPage = () => {
     const [students, setStudents] = useState<Array<any>>([])
     const getStudents = async () => {
         const studentModel = await DataStore.query(User)
-        setStudents(studentModel.filter(data => data.Role?.name === 'Student'))
+        setStudents(studentModel.filter(data => data.role?.name === 'Student'))
     }
 
     useEffect(() => {
@@ -126,6 +126,15 @@ const Students: NextPage = () => {
             </div>
         </>
     )
+}
+
+export async function getStaticProps() {
+    return {
+        props: {
+            protected: true,
+            userTypes: ['Admin']
+        }
+    };
 }
 
 // @ts-ignore

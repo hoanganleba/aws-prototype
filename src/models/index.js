@@ -4,10 +4,16 @@ import { schema } from './schema';
 
 
 
-const { Role, Course, User } = initSchema(schema);
+const { Enrolment, Course, Attendance, Student, User, Role, StudentAssignment, Assignment, Teacher } = initSchema(schema);
 
 export {
-  Role,
+  Enrolment,
   Course,
-  User
+  Attendance,
+  Student,
+  User,
+  Role,
+  StudentAssignment,
+  Assignment,
+  Teacher
 };
