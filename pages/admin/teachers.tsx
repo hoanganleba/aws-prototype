@@ -91,7 +91,7 @@ const Teachers: NextPage = () => {
                     <button
                         type="button"
                         onClick={openModal}
-                        className="py-2 px-5 font-medium bg-blue-500 text-white rounded-full flex items-center">
+                        className="py-2 px-5 font-medium bg-blue-500 text-white rounded-full flex items-center hover:bg-blue-700 focus:ring focus:ring-blue-200">
                         <span className="mr-2">Add Teacher</span>
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24"
                              stroke="currentColor">
@@ -210,17 +210,17 @@ const Teachers: NextPage = () => {
                                     </div>
                                 </td>
                                 <td className="px-6 py-4 flex justify-center">
-                                    <div
-                                        className="text-white bg-blue-500 rounded-full mr-3 h-10 w-10 flex items-center justify-center">
+                                    <button
+                                        className="text-white bg-blue-500 rounded-full mr-1.5 h-10 w-10 flex items-center justify-center hover:bg-blue-700 focus:ring focus:ring-blue-200">
                                         <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none"
                                              viewBox="0 0 24 24" stroke="currentColor">
                                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
                                                   d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
                                         </svg>
-                                    </div>
+                                    </button>
                                     <button
                                         onClick={() => deleteTeacher(teacher.id)}
-                                        className="text-white bg-red-500 rounded-full mr-3 h-10 w-10 flex items-center justify-center">
+                                        className="text-white bg-red-500 rounded-full ml-1.5 h-10 w-10 flex items-center justify-center hover:bg-red-700 focus:ring focus:ring-red-200">
                                         <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none"
                                              viewBox="0 0 24 24" stroke="currentColor">
                                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}

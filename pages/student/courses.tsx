@@ -90,7 +90,7 @@ const Courses: NextPage = () => {
                             </td>
                             <td className="px-6 py-4 flex justify-center">
                                 <Link href={`/student`}>
-                                    <a className="text-sm text-blue-500">View</a>
+                                    <a className="px-4 py-2 text-sm text-blue-500 hover:bg-gray-100 hover:border hover:border-transparent hover:rounded-xl">View</a>
                                 </Link>
                             </td>
                         </tr>
