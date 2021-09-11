@@ -26,6 +26,7 @@ type AppLayoutProps<P = {}> = AppProps & {
 function MyApp({Component, pageProps}: AppLayoutProps) {
     const [userType, setUserType] = useState<any>(null)
     const [userId, setUserId] = useState<string>('')
+    const [errorMessage, setErrorMessage] = useState<string>('')
     const router = useRouter()
 
     useEffect(() => {
@@ -63,36 +64,42 @@ function MyApp({Component, pageProps}: AppLayoutProps) {
             localStorage.setItem('user-id', user[0].id)
             setUserType(response[0])
             setUserId(user[0].id)
+            setErrorMessage('')
             await router.push('/student')
         }
-        if (response[0] === 'Teacher') {
+        else if (response[0] === 'Teacher') {
             const user = (await DataStore.query(Teacher)).filter(item => item.user?.id === id[0])
             localStorage.setItem('user-type', response[0])
             localStorage.setItem('user-id', user[0].id)
             setUserType(response[0])
             setUserId(user[0].id)
+            setErrorMessage('')
             await router.push('/teacher')
         }
-        if (response[0] === 'Admin') {
+        else if (response[0] === 'Admin') {
             localStorage.setItem('user-type', response[0])
             setUserType(response[0])
+            setErrorMessage('')
             await router.push('/admin')
+        }
+        else {
+            setErrorMessage('Invalid email or password')
         }
     }
 
     const logout = async () => {
         localStorage.removeItem('user-type')
-        setUserType(null)
         localStorage.removeItem('user-id')
+        setUserType(null)
         setUserId('')
         await router.push('/')
     }
 
     const getLayout = Component.getLayout || ((page: ReactNode) => page);
     return (
-        <UserContext.Provider value={{userId, userType, login, logout}}>
+        <UserContext.Provider value={{errorMessage, userId, userType, login, logout}}>
             <NextNprogress
-                color="#29D"
+                color="#3B82F6"
                 startPosition={0.3}
                 stopDelayMs={200}
                 height={3}

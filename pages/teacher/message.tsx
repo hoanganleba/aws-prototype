@@ -58,8 +58,6 @@ const Message: NextPage = () => {
 
     }, [selectedStudent])
 
-
-
     return (
         <div className="mx-2 mb-8">
             <div className="mt-11 mx-4 flex justify-between items-end mb-6">
@@ -92,7 +90,6 @@ const Message: NextPage = () => {
                     <div className="h-80 overflow-y-scroll overscroll-auto">
                         {students.map(student => (
                             <div
-                                onClick={() => setSelectedStudent(student)}
                                 key={student.id}
                                 className="rounded-2xl py-2.5 px-4 mb-2 flex items-center text-gray-800">
                                 <Image src={profilePic} alt="Picture of the author"/>

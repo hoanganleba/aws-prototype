@@ -49,7 +49,9 @@ const Teachers: NextPage = () => {
     }
 
     const deleteTeacher = async (id: any) => {
-        const teacherModelToDelete: any = await DataStore.query(User, id);
+        const userModelToDelete: any = await DataStore.query(User, id);
+        const teacherModelToDelete: any = (await DataStore.query(Teacher)).filter(t => t.user?.id === id)
+        await DataStore.delete(userModelToDelete);
         await DataStore.delete(teacherModelToDelete);
     }
 
