@@ -47,10 +47,11 @@ const Message: NextPage = () => {
     }
     useEffect(() => {
         getTeachers()
-        scrollToBottom()
     })
+
     useEffect(() => {
         getMessage()
+        scrollToBottom()
         DataStore.observe(Chat).subscribe(() => {
             getMessage()
             scrollToBottom()
@@ -145,5 +146,6 @@ Message.getLayout = (page: any) => (
         {page}
     </StudentLayout>
 )
+
 
 export default Message
