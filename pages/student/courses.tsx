@@ -30,7 +30,7 @@ const Courses: NextPage = () => {
                 <h2 className="text-4xl text-gray-800 font-semibold">Course</h2>
                 <div className="text-sm flex items-center font-medium">
                     <Link href={"/student"}>
-                        <a className="text-gray-600">Dashboard</a>
+                        <a className="text-gray-600 hover:underline">Dashboard</a>
                     </Link>
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-2 w-2 mx-2" fill="none" viewBox="0 0 24 24"
                          stroke="currentColor">
@@ -90,7 +90,7 @@ const Courses: NextPage = () => {
                             </td>
                             <td className="px-6 py-4 flex justify-center">
                                 <Link href={`/student`}>
-                                    <a className="px-4 py-2 text-sm text-blue-500 hover:bg-gray-100 hover:border hover:border-transparent hover:rounded-xl">View</a>
+                                    <a className="border border-transparent rounded-xl px-4 py-2 text-sm text-blue-500 hover:bg-gray-100 focus:bg-gray-200">View</a>
                                 </Link>
                             </td>
                         </tr>
