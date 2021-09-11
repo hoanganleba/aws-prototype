@@ -27,6 +27,13 @@ const Message: NextPage = () => {
 
         setMessage('')
     }
+
+    const scrollToBottom = () => {
+        const messages = document.getElementById('chat-section')
+        // @ts-ignore
+        messages.scrollTop = messages.scrollHeight;
+    }
+
     const getTeachers = async () => {
         const teacherModel = await DataStore.query(Teacher)
         setTeachers(teacherModel)
@@ -40,11 +47,13 @@ const Message: NextPage = () => {
     }
     useEffect(() => {
         getTeachers()
+        scrollToBottom()
     })
     useEffect(() => {
         getMessage()
         DataStore.observe(Chat).subscribe(() => {
             getMessage()
+            scrollToBottom()
         });
 
     }, [selectedTeacher])
