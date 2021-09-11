@@ -1,10 +1,10 @@
-import type { NextPage } from "next";
+import type {NextPage} from "next";
 import Link from "next/link";
-import React, { useContext, useState } from "react";
+import React, {useContext, useState} from "react";
 import UserContext from "context/UserContext";
 
 const Home: NextPage = () => {
-    const { login, errorMessage } = useContext(UserContext);
+    const {login, errorMessage} = useContext(UserContext);
     const [email, setEmail] = useState<string>("");
     const [emailEmpty, setEmailEmpty] = useState<boolean>(false);
     const [passwordEmpty, setPasswordEmpty] = useState<boolean>(false);
@@ -38,9 +38,9 @@ const Home: NextPage = () => {
                             <svg className="w-4 h-4 fill-current" viewBox="0 0 20 20">
                                 <path
                                     d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"
-                                    clip-rule="evenodd"
-                                    fill-rule="evenodd"
-                                ></path>
+                                    clipRule="evenodd"
+                                    fillRule="evenodd"
+                                />
                             </svg>
                         </span>
                         <p className="ml-6">{errorMessage}</p>
@@ -66,10 +66,11 @@ const Home: NextPage = () => {
                             aria-label="password"
                             placeholder="Password"
                         />
-                        {passwordEmpty ? <p className="text-red-500 text-xs mt-2 ml-4">Please enter your password</p> : ''}
+                        {passwordEmpty ?
+                            <p className="text-red-500 text-xs mt-2 ml-4">Please enter your password</p> : ''}
                     </div>
                     <div className="flex items-center mb-5">
-                        <input aria-label="remember" type="checkbox" />
+                        <input aria-label="remember" type="checkbox"/>
                         <h6 className="font-medium ml-4">Keep me signed in</h6>
                     </div>
                     <button
