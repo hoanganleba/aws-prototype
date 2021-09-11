@@ -1,4 +1,11 @@
-type Enrolment @model @auth(rules: [{allow: public}]) @key(name: "byStudent", fields: ["studentID"]) {
+type Chat @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  message: String
+  student: Student @connection
+  teacher: Teacher @connection
+}
+
+type Enrolment @model @key(name: "byStudent", fields: ["studentID"]) @auth(rules: [{allow: public}]) {
   id: ID!
   studentID: ID
   course: Course @connection
@@ -22,7 +29,6 @@ type Teacher @model @auth(rules: [{allow: public}]) {
 type Student @model @auth(rules: [{allow: public}]) @key(name: "byAttendance", fields: ["attendanceID"]) {
   id: ID!
   user: User @connection
-  assignments: [StudentAssignment] @connection(keyName: "byStudent", fields: ["id"])
   attendanceID: ID
   enrolments: [Enrolment] @connection(keyName: "byStudent", fields: ["id"])
 }
@@ -55,13 +61,5 @@ type User @model @auth(rules: [{allow: public}]) {
   password: String
   role: Role @connection
   teachers: [Course] @connection(keyName: "byUser", fields: ["id"])
-}
-
-type StudentAssignment @model(queries: null) @key(name: "byStudent", fields: ["studentID", "assignmentID"]) @key(name: "byAssignment", fields: ["assignmentID", "studentID"]) @auth(rules: [{allow: public}, {allow: public}]) {
-  id: ID!
-  studentID: ID!
-  assignmentID: ID!
-  student: Student @connection(fields: ["studentID"])
-  assignment: Assignment @connection(fields: ["assignmentID"])
 }
  

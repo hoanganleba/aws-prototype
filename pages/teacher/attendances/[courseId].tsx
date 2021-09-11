@@ -1,46 +1,22 @@
-import TeacherLayout from "../../../components/Layouts/TeacherLayout";
+import TeacherLayout from "components/Layouts/TeacherLayout";
 import {NextPage} from "next";
 import {useRouter} from "next/router";
-import {Fragment, useEffect, useState} from "react";
+import {useEffect, useState} from "react";
 import {DataStore} from "@aws-amplify/datastore";
-import {Course, Enrolment, Student} from "../../../src/models";
+import {Enrolment, Student} from "src/models";
 import Link from "next/link";
-import {Dialog, Transition} from "@headlessui/react";
 
 const Attendances: NextPage = () => {
     const router = useRouter()
     const {courseId} = router.query
-    const [isOpen, setIsOpen] = useState<boolean>(false)
     const [students, setStudents] = useState<Array<any>>([])
-    const [studentIdSelected, setStudentIdSelected] = useState('')
     const [enrollments, setEnrollments] = useState<Array<any>>([])
-
-    const addStudentToCourse = async () => {
-        const courseModel = await DataStore.query(Course)
-        const course = courseModel.filter(item => item.id === courseId)
-        await DataStore.save(
-            new Enrolment({
-                course: course[0],
-                studentID: studentIdSelected
-            })
-        )
-        closeModal()
-    }
 
     const getEnrollments = async () => {
         const enrollmentModel = await DataStore.query(Enrolment)
         const studentModel = await DataStore.query(Student)
         setEnrollments(enrollmentModel)
         setStudents(studentModel)
-    }
-
-
-    const closeModal = () => {
-        setIsOpen(false)
-    }
-
-    const openModal = () => {
-        setIsOpen(true)
     }
 
     useEffect(() => {
@@ -104,18 +80,6 @@ const Attendances: NextPage = () => {
                         <th scope="col">
                             <span
                                 className="font-medium px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                Tardy
-                            </span>
-                        </th>
-                        <th scope="col">
-                            <span
-                                className="font-medium px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                On Leave
-                            </span>
-                        </th>
-                        <th scope="col">
-                            <span
-                                className="font-medium px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                 Absent
                             </span>
                         </th>
@@ -123,29 +87,26 @@ const Attendances: NextPage = () => {
                     </thead>
                     <tbody className="bg-white divide-y divide-gray-200">
                     {enrollments.map(attendance => (
-                            <tr key={attendance.id}>
-                                <td className="px-6 py-4 whitespace-nowrap">
-                                    <div className="flex items-center">
-                                        <div className="text-sm font-medium text-gray-900">
-                                            {students.filter(student => student.id === attendance.studentID).map(x => x.user?.name)}
-                                        </div>
+                        <tr key={attendance.id}>
+                            <td className="px-6 py-4 whitespace-nowrap">
+                                <div className="flex items-center">
+                                    <div className="text-sm font-medium text-gray-900">
+                                        {students.filter(student => student.id === attendance.studentID).map(x => x.user?.name)}
                                     </div>
-                                </td>
-                                <td className="px-6 py-4 flex justify-center items-center">
+                                </div>
+                            </td>
+                            <td className="px-6 py-4 whitespace-nowrap">
+                                <div className="flex justify-center">
                                     <input type="checkbox"/>
-                                </td>
-                                <td className="px-6 py-4 flex justify-center items-center">
+                                </div>
+                            </td>
+                            <td className="px-6 py-4 whitespace-nowrap">
+                                <div className="flex justify-center">
                                     <input type="checkbox"/>
-                                </td>
-                                <td className="px-6 py-4 flex justify-center items-center">
-                                    <input type="checkbox"/>
-                                </td>
-                                <td className="px-6 py-4 flex justify-center items-center">
-                                    <input type="checkbox"/>
-                                </td>
-                            </tr>
-                        ))
-                    }
+                                </div>
+                            </td>
+                        </tr>
+                    ))}
                     </tbody>
                 </table>
             </div>

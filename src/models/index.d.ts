@@ -4,15 +4,7 @@ import { ModelInit, MutableModel, PersistentModelConstructor } from "@aws-amplif
 
 
 
-type EnrolmentMetaData = {
-  readOnlyFields: 'createdAt' | 'updatedAt';
-}
-
-type CourseMetaData = {
-  readOnlyFields: 'createdAt' | 'updatedAt';
-}
-
-type AttendanceMetaData = {
+type ChatMetaData = {
   readOnlyFields: 'createdAt' | 'updatedAt';
 }
 
@@ -28,11 +20,15 @@ type RoleMetaData = {
   readOnlyFields: 'createdAt' | 'updatedAt';
 }
 
-type StudentAssignmentMetaData = {
+type CourseMetaData = {
   readOnlyFields: 'createdAt' | 'updatedAt';
 }
 
-type AssignmentMetaData = {
+type AttendanceMetaData = {
+  readOnlyFields: 'createdAt' | 'updatedAt';
+}
+
+type EnrolmentMetaData = {
   readOnlyFields: 'createdAt' | 'updatedAt';
 }
 
@@ -40,44 +36,24 @@ type TeacherMetaData = {
   readOnlyFields: 'createdAt' | 'updatedAt';
 }
 
-export declare class Enrolment {
-  readonly id: string;
-  readonly studentID?: string;
-  readonly course?: Course;
-  readonly createdAt?: string;
-  readonly updatedAt?: string;
-  constructor(init: ModelInit<Enrolment, EnrolmentMetaData>);
-  static copyOf(source: Enrolment, mutator: (draft: MutableModel<Enrolment, EnrolmentMetaData>) => MutableModel<Enrolment, EnrolmentMetaData> | void): Enrolment;
+type AssignmentMetaData = {
+  readOnlyFields: 'createdAt' | 'updatedAt';
 }
 
-export declare class Course {
+export declare class Chat {
   readonly id: string;
-  readonly name?: string;
-  readonly userID?: string;
-  readonly attendances?: (Attendance | null)[];
-  readonly code?: string;
+  readonly message?: string;
+  readonly student?: Student;
+  readonly teacher?: Teacher;
   readonly createdAt?: string;
   readonly updatedAt?: string;
-  constructor(init: ModelInit<Course, CourseMetaData>);
-  static copyOf(source: Course, mutator: (draft: MutableModel<Course, CourseMetaData>) => MutableModel<Course, CourseMetaData> | void): Course;
-}
-
-export declare class Attendance {
-  readonly id: string;
-  readonly students?: (Student | null)[];
-  readonly attendDate?: string;
-  readonly teacherID?: string;
-  readonly courseID?: string;
-  readonly createdAt?: string;
-  readonly updatedAt?: string;
-  constructor(init: ModelInit<Attendance, AttendanceMetaData>);
-  static copyOf(source: Attendance, mutator: (draft: MutableModel<Attendance, AttendanceMetaData>) => MutableModel<Attendance, AttendanceMetaData> | void): Attendance;
+  constructor(init: ModelInit<Chat, ChatMetaData>);
+  static copyOf(source: Chat, mutator: (draft: MutableModel<Chat, ChatMetaData>) => MutableModel<Chat, ChatMetaData> | void): Chat;
 }
 
 export declare class Student {
   readonly id: string;
   readonly user?: User;
-  readonly assignments?: (StudentAssignment | null)[];
   readonly attendanceID?: string;
   readonly enrolments?: (Enrolment | null)[];
   readonly createdAt?: string;
@@ -109,26 +85,38 @@ export declare class Role {
   static copyOf(source: Role, mutator: (draft: MutableModel<Role, RoleMetaData>) => MutableModel<Role, RoleMetaData> | void): Role;
 }
 
-export declare class StudentAssignment {
-  readonly id: string;
-  readonly assignmentID: string;
-  readonly student?: Student;
-  readonly assignment?: Assignment;
-  readonly createdAt?: string;
-  readonly updatedAt?: string;
-  constructor(init: ModelInit<StudentAssignment, StudentAssignmentMetaData>);
-  static copyOf(source: StudentAssignment, mutator: (draft: MutableModel<StudentAssignment, StudentAssignmentMetaData>) => MutableModel<StudentAssignment, StudentAssignmentMetaData> | void): StudentAssignment;
-}
-
-export declare class Assignment {
+export declare class Course {
   readonly id: string;
   readonly name?: string;
+  readonly userID?: string;
+  readonly attendances?: (Attendance | null)[];
+  readonly code?: string;
+  readonly createdAt?: string;
+  readonly updatedAt?: string;
+  constructor(init: ModelInit<Course, CourseMetaData>);
+  static copyOf(source: Course, mutator: (draft: MutableModel<Course, CourseMetaData>) => MutableModel<Course, CourseMetaData> | void): Course;
+}
+
+export declare class Attendance {
+  readonly id: string;
+  readonly students?: (Student | null)[];
+  readonly attendDate?: string;
   readonly teacherID?: string;
+  readonly courseID?: string;
+  readonly createdAt?: string;
+  readonly updatedAt?: string;
+  constructor(init: ModelInit<Attendance, AttendanceMetaData>);
+  static copyOf(source: Attendance, mutator: (draft: MutableModel<Attendance, AttendanceMetaData>) => MutableModel<Attendance, AttendanceMetaData> | void): Attendance;
+}
+
+export declare class Enrolment {
+  readonly id: string;
+  readonly studentID?: string;
   readonly course?: Course;
   readonly createdAt?: string;
   readonly updatedAt?: string;
-  constructor(init: ModelInit<Assignment, AssignmentMetaData>);
-  static copyOf(source: Assignment, mutator: (draft: MutableModel<Assignment, AssignmentMetaData>) => MutableModel<Assignment, AssignmentMetaData> | void): Assignment;
+  constructor(init: ModelInit<Enrolment, EnrolmentMetaData>);
+  static copyOf(source: Enrolment, mutator: (draft: MutableModel<Enrolment, EnrolmentMetaData>) => MutableModel<Enrolment, EnrolmentMetaData> | void): Enrolment;
 }
 
 export declare class Teacher {
@@ -140,4 +128,15 @@ export declare class Teacher {
   readonly updatedAt?: string;
   constructor(init: ModelInit<Teacher, TeacherMetaData>);
   static copyOf(source: Teacher, mutator: (draft: MutableModel<Teacher, TeacherMetaData>) => MutableModel<Teacher, TeacherMetaData> | void): Teacher;
+}
+
+export declare class Assignment {
+  readonly id: string;
+  readonly name?: string;
+  readonly teacherID?: string;
+  readonly course?: Course;
+  readonly createdAt?: string;
+  readonly updatedAt?: string;
+  constructor(init: ModelInit<Assignment, AssignmentMetaData>);
+  static copyOf(source: Assignment, mutator: (draft: MutableModel<Assignment, AssignmentMetaData>) => MutableModel<Assignment, AssignmentMetaData> | void): Assignment;
 }

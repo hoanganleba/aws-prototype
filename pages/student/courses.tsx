@@ -6,21 +6,22 @@ import {API} from 'aws-amplify';
 import * as queries from 'src/graphql/queries';
 
 const Courses: NextPage = () => {
-    const [enrollmentCourses, setEnrollmentCourses] = useState([])
-    let filter = {
-        studentID: {
-            eq: '3e6b08ea-baa9-458f-aa13-bdd96438a2f6'
-        }
-    };
+    const [enrollmentCourses, setEnrollmentCourses] = useState<any[]>([])
 
-    const getStudent = async () => {
-        const students = await API.graphql({
-            query: queries.listEnrolments,
-            variables: {filter: filter}
-        })
-        setEnrollmentCourses(students.data?.listEnrolments.items)
-    }
     useEffect(() => {
+        let filter = {
+            studentID: {
+                eq: '3e6b08ea-baa9-458f-aa13-bdd96438a2f6'
+            }
+        };
+        const getStudent = async () => {
+            const students = await API.graphql({
+                query: queries.listEnrolments,
+                variables: {filter: filter}
+            })
+            // @ts-ignore
+            setEnrollmentCourses(students.data.listEnrolments.items)
+        }
         getStudent()
     }, [])
     return (

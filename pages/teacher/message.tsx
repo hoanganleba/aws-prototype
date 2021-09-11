@@ -1,16 +1,16 @@
 import type {NextPage} from 'next'
-import AdminLayout from 'components/Layouts/AdminLayout'
 import Link from 'next/link'
 import profilePic from 'public/Path_2.png'
 import Image from 'next/image'
+import TeacherLayout from 'components/Layouts/TeacherLayout'
 
-const Chat: NextPage = () => {
+const Message: NextPage = () => {
     return (
         <div className="mx-2 mb-8">
             <div className="mt-11 mx-4 flex justify-between items-end mb-6">
                 <h2 className="text-4xl text-gray-800 font-semibold">Chat</h2>
                 <div className="text-sm flex items-center font-medium">
-                    <Link href={"/admin"}>
+                    <Link href={"/teacher"}>
                         <a className="text-gray-600">Dashboard</a>
                     </Link>
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-2 w-2 mx-2" fill="none" viewBox="0 0 24 24"
@@ -95,37 +95,28 @@ const Chat: NextPage = () => {
 
                         </div>
                     </div>
-                    <div className="bg-gray-100 flex items-center py-2.5 px-4 rounded-2xl block text-gray-500 mt-3">
+                    <form className="bg-gray-100 flex items-center py-2.5 px-4 rounded-2xl block text-gray-500 mt-3">
                         <input
                             className="placeholder-gray-500 w-full font-medium focus:outline-none bg-transparent"
                             aria-label="message" placeholder="Type a message"/>
-                        <svg xmlns="http://www.w3.org/2000/svg" className="transform rotate-45 h-5 w-5 ml-auto"
-                             fill="none"
-                             viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
-                                  d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/>
-                        </svg>
-                    </div>
+                            <svg xmlns="http://www.w3.org/2000/svg" className="transform rotate-45 h-5 w-5 ml-auto"
+                                 fill="none"
+                                 viewBox="0 0 24 24" stroke="currentColor">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
+                                      d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/>
+                            </svg>
+                    </form>
                 </div>
             </div>
         </div>
     )
 }
 
-export async function getStaticProps() {
-    return {
-        props: {
-            protected: true,
-            userTypes: ['Admin']
-        }
-    };
-}
-
 // @ts-ignore
-Chat.getLayout = (page: any) => (
-    <AdminLayout>
+Message.getLayout = (page: any) => (
+    <TeacherLayout>
         {page}
-    </AdminLayout>
+    </TeacherLayout>
 )
 
-export default Chat
+export default Message
