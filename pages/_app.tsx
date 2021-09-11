@@ -6,7 +6,7 @@ import Amplify from 'aws-amplify'
 import config from 'src/aws-exports'
 import UserContext from "context/UserContext";
 import {DataStore} from "@aws-amplify/datastore";
-import {User, Student} from 'src/models'
+import {User, Student, Teacher} from 'src/models'
 import {useRouter} from 'next/router'
 import NextNprogress from 'nextjs-progressbar'
 
@@ -66,8 +66,11 @@ function MyApp({Component, pageProps}: AppLayoutProps) {
             await router.push('/student')
         }
         if (response[0] === 'Teacher') {
+            const user = (await DataStore.query(Teacher)).filter(item => item.user?.id === id[0])
             localStorage.setItem('user-type', response[0])
+            localStorage.setItem('user-id', user[0].id)
             setUserType(response[0])
+            setUserId(user[0].id)
             await router.push('/teacher')
         }
         if (response[0] === 'Admin') {
