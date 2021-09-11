@@ -38,13 +38,14 @@ const Message: NextPage = () => {
         const teacherModel = await DataStore.query(Teacher)
         setTeachers(teacherModel)
     }
+
     const getMessage = async () => {
         if (selectedTeacher?.id !== undefined) {
             const messageModel = (await DataStore.query(Chat)).filter(item => item.teacher?.id === selectedTeacher?.id)
             setMessages(messageModel)
-            console.log(messageModel)
         }
     }
+
     useEffect(() => {
         getTeachers()
     })

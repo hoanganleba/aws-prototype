@@ -42,7 +42,6 @@ const Message: NextPage = () => {
         if (selectedStudent?.id !== undefined) {
             const messageModel = (await DataStore.query(Chat)).filter(item => item.student?.id === selectedStudent?.id)
             setMessages(messageModel)
-            console.log(messageModel)
         }
     }
     useEffect(() => {
@@ -90,6 +89,7 @@ const Message: NextPage = () => {
                     <div className="h-80 overflow-y-scroll overscroll-auto">
                         {students.map(student => (
                             <div
+                                onClick={() => setSelectedStudent(student)}
                                 key={student.id}
                                 className="rounded-2xl py-2.5 px-4 mb-2 flex items-center text-gray-800">
                                 <Image src={profilePic} alt="Picture of the author"/>
