@@ -3,6 +3,7 @@ type Chat @model @auth(rules: [{allow: public}]) {
   message: String
   student: Student @connection
   teacher: Teacher @connection
+  sender: ID
 }
 
 type Enrolment @model @key(name: "byStudent", fields: ["studentID"]) @auth(rules: [{allow: public}]) {

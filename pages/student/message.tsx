@@ -20,6 +20,7 @@ const Message: NextPage = () => {
         const selectedStudent = await DataStore.query(Student, userId)
         await DataStore.save(new Chat({
             message,
+            sender: userId,
             teacher: selectedTeacher,
             student: selectedStudent
         }))
@@ -99,8 +100,9 @@ const Message: NextPage = () => {
                         <div id="chat-section" className="h-80 overflow-y-scroll overscroll-auto p-4">
                             {messages.map(item => (
                                 <div key={item.id}
-                                     className={`flex ${item.student?.id ? 'justify-end' : 'justify-start'}`}>
-                                    <div className="rounded-2xl bg-blue-500 py-2.5 px-4 text-white my-1">
+                                     className={`flex ${item.sender === userId ? 'justify-end' : 'justify-start'}`}>
+                                    <div
+                                        className={`${item.sender === userId ? 'bg-blue-500 text-white' : 'bg-white'} rounded-2xl py-2.5 px-4 my-1`}>
                                         {item.message}
                                     </div>
                                 </div>

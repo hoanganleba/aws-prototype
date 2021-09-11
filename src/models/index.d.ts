@@ -45,6 +45,7 @@ export declare class Chat {
   readonly message?: string;
   readonly student?: Student;
   readonly teacher?: Teacher;
+  readonly sender?: string;
   readonly createdAt?: string;
   readonly updatedAt?: string;
   constructor(init: ModelInit<Chat, ChatMetaData>);

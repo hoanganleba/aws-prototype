@@ -43,6 +43,13 @@ export const schema = {
                         "targetName": "chatTeacherId"
                     }
                 },
+                "sender": {
+                    "name": "sender",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": false,
+                    "attributes": []
+                },
                 "createdAt": {
                     "name": "createdAt",
                     "isArray": false,
@@ -812,5 +819,5 @@ export const schema = {
     },
     "enums": {},
     "nonModels": {},
-    "version": "0834aa749e2a9ad4e7a741731397c686"
+    "version": "3dd676dfff2a815d489057cd5ebb3912"
 };
