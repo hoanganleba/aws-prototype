@@ -53,7 +53,7 @@ const Courses: NextPage = () => {
                 <h2 className="text-4xl text-gray-800 font-semibold">Courses</h2>
                 <div className="text-sm flex items-center font-medium">
                     <Link href={"/teacher"}>
-                        <a className="text-gray-600">Dashboard</a>
+                        <a className="text-gray-600 hover:underline">Dashboard</a>
                     </Link>
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-2 w-2 mx-2" fill="none" viewBox="0 0 24 24"
                          stroke="currentColor">
@@ -77,7 +77,7 @@ const Courses: NextPage = () => {
                         </svg>
                     </div>
                     <button onClick={openModal}
-                            className="py-2 px-5 font-medium bg-blue-500 text-white rounded-full flex items-center">
+                            className="py-2 px-5 font-medium bg-blue-500 text-white rounded-full flex items-center hover:bg-blue-700 focus:ring focus:ring-blue-200">
                         <span className="mr-2">Add Courses</span>
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24"
                              stroke="currentColor">
@@ -178,22 +178,22 @@ const Courses: NextPage = () => {
                                 </td>
                                 <td className="px-6 py-4 flex justify-center items-center">
                                     <Link href={`/teacher/enrollments/${course.id}`}>
-                                       <a className="text-sm text-blue-500">Enrollments</a>
+                                       <a className="border border-transparent rounded-xl text-sm text-white px-4 py-2 bg-pink-500 mr-1.5 hover:bg-pink-700 focus:ring focus:ring-pink-200">Enrolments</a>
                                     </Link>
                                     <Link href={`/teacher/attendances/${course.id}`}>
-                                        <a className="text-sm text-blue-500 mx-3">Attendances</a>
+                                        <a className="border border-transparent rounded-xl text-sm text-white px-4 py-2 bg-green-500 mx-1.5 hover:bg-green-700 focus:ring focus:ring-green-200">Attendance</a>
                                     </Link>
-                                    <div
-                                        className="text-white bg-blue-500 rounded-full mx-3 h-10 w-10 flex items-center justify-center">
+                                    <button
+                                        className="text-white bg-blue-500 rounded-full mx-1.5 h-10 w-10 flex items-center justify-center hover:bg-blue-700 focus:ring focus:ring-blue-200">
                                         <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none"
                                              viewBox="0 0 24 24" stroke="currentColor">
                                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
                                                   d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
                                         </svg>
-                                    </div>
+                                    </button>
                                     <button
                                         onClick={() => deleteCourse(course.id)}
-                                        className="text-white bg-red-500 rounded-full mr-3 h-10 w-10 flex items-center justify-center">
+                                        className="text-white bg-red-500 rounded-full ml-1.5 h-10 w-10 flex items-center justify-center hover:bg-red-700 focus:ring focus:ring-red-200">
                                         <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none"
                                              viewBox="0 0 24 24" stroke="currentColor">
                                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}

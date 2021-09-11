@@ -63,7 +63,7 @@ const Message: NextPage = () => {
                 <h2 className="text-4xl text-gray-800 font-semibold">Chat</h2>
                 <div className="text-sm flex items-center font-medium">
                     <Link href={"/student"}>
-                        <a className="text-gray-600">Dashboard</a>
+                        <a className="text-gray-600 hover:underline">Dashboard</a>
                     </Link>
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-2 w-2 mx-2" fill="none" viewBox="0 0 24 24"
                          stroke="currentColor">
@@ -91,7 +91,7 @@ const Message: NextPage = () => {
                             <div
                                 onClick={() => setSelectedStudent(student)}
                                 key={student.id}
-                                className="rounded-2xl py-2.5 px-4 mb-2 flex items-center text-gray-800">
+                                className="cursor-pointer rounded-2xl py-2.5 px-4 mb-2 flex items-center text-gray-800 hover:bg-gray-100 focus:bg-gray-200">
                                 <Image src={profilePic} alt="Picture of the author"/>
                                 <div className="ml-2.5 font-medium">
                                     <p>{student.user?.name}</p>

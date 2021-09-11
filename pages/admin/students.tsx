@@ -68,7 +68,7 @@ const Students: NextPage = () => {
                 <h2 className="text-4xl text-gray-800 font-semibold">Student</h2>
                 <div className="text-sm flex items-center font-medium">
                     <Link href={"/admin"}>
-                        <a className="text-gray-600">Dashboard</a>
+                        <a className="text-gray-600 hover:underline">Dashboard</a>
                     </Link>
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-2 w-2 mx-2" fill="none" viewBox="0 0 24 24"
                          stroke="currentColor">
@@ -154,7 +154,7 @@ const Students: NextPage = () => {
                                         <div className="mt-4">
                                             <button
                                                 type="button"
-                                                className="inline-flex py-2 px-5 font-medium bg-blue-500 text-white rounded-full flex items-center"
+                                                className="inline-flex py-2 px-5 font-medium bg-blue-500 text-white rounded-full flex items-center hover:bg-blue-700 focus:ring focus:ring-blue-200 "
                                                 onClick={addStudent}
                                             >
                                                 Add
