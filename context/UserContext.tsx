@@ -1,13 +1,13 @@
-import {createContext} from 'react'
-
+import {createContext} from "react";
 
 const UserContext = createContext({
-    errorMessage: '',
-    userId: '',
+    errorMessage: "",
+    userId: "",
     userType: null,
-    login: (email: string | undefined, password: string | undefined) => {},
-    logout: () => {}
-})
+    login: (email: string | undefined, password: string | undefined) => {
+    },
+    logout: () => {
+    },
+});
 
-export default UserContext
-
+export default UserContext;

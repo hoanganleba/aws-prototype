@@ -1,16 +1,14 @@
 import AdminSidebar from "../Sidebar/AdminSidebar";
-import Container from "../Container";
+import Header from "../Header";
 
 const AdminLayout = ({children}: any) => {
     return (
         <>
             <div className="min-h-screen flex">
                 <AdminSidebar/>
-                <Container>
-                    {children}
-                </Container>
+                <Header>{children}</Header>
             </div>
         </>
-    )
-}
-export default AdminLayout
+    );
+};
+export default AdminLayout;

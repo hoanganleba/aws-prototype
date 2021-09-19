@@ -1,5 +1,5 @@
 const ProtectedRoute = ({children}: any) => {
-    return children
-}
+    return children;
+};
 
-export default ProtectedRoute
+export default ProtectedRoute;

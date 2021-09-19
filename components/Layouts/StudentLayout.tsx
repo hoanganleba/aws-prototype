@@ -1,16 +1,14 @@
 import StudentSidebar from "../Sidebar/StudentSidebar";
-import Container from "../Container";
+import Header from "../Header";
 
 const StudentLayout = ({children}: any) => {
     return (
         <>
             <div className="min-h-screen flex">
                 <StudentSidebar/>
-                <Container>
-                    {children}
-                </Container>
+                <Header>{children}</Header>
             </div>
         </>
-    )
-}
-export default StudentLayout
+    );
+};
+export default StudentLayout;

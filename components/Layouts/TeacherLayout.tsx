@@ -1,16 +1,14 @@
 import TeacherSidebar from "../Sidebar/TeacherSidebar";
-import Container from "../Container";
+import Header from "../Header";
 
 const TeacherLayout = ({children}: any) => {
     return (
         <>
             <div className="min-h-screen flex">
                 <TeacherSidebar/>
-                <Container>
-                    {children}
-                </Container>
+                <Header>{children}</Header>
             </div>
         </>
-    )
-}
-export default TeacherLayout
+    );
+};
+export default TeacherLayout;
