@@ -10,9 +10,9 @@ const navItems = [
 
 const StudentSidebar = () => {
     return (
-        <div className="bg-white min-h-full w-56 flex-shrink-0">
-            <Sidebar navItems={navItems} />
-        </div>
+        <>
+            <Sidebar navItems={navItems}/>
+        </>
     );
 };
 

@@ -68,14 +68,17 @@ const Students: NextPage = () => {
 
     return (
         <>
-            <div className="mx-4 flex justify-between items-end mb-6">
-                <h2 className="text-4xl text-gray-800 font-semibold">Student</h2>
-                <div className="text-sm flex items-center font-medium">
-                    <Link href={"/admin"}>
-                        <a className="text-gray-600 hover:underline">Dashboard</a>
-                    </Link>
-                    <ChevronDoubleRightIcon className="h-2 w-2 mx-2"/>
-                    <p className="text-blue-500">Student</p>
+            <div className="flex justify-between items-end mb-6">
+                <h2 className="text-4xl font-semibold">Student</h2>
+                <div className="text-sm breadcrumbs">
+                    <ul>
+                        <li>
+                            <Link href={"/admin"}>
+                                <a>Dashboard</a>
+                            </Link>
+                        </li>
+                        <li>Students</li>
+                    </ul>
                 </div>
             </div>
             <div className="rounded-2xl bg-white p-5">

@@ -27,7 +27,7 @@ const Index: NextPage = () => {
 
     return (
         <>
-            <h2 className="text-4xl mx-4 text-gray-800 font-semibold mb-6">
+            <h2 className="text-4xl mx-4 font-semibold mb-6">
                 Dashboard
             </h2>
             <div className="grid grid-cols-4 gap-x-6">

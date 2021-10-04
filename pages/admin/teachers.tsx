@@ -1,30 +1,20 @@
 import type {NextPage} from "next";
+import Head from "next/head";
 import AdminLayout from "components/Layouts/AdminLayout";
 import Link from "next/link";
-import {useEffect, useState, Fragment} from "react";
+import {useEffect, useState} from "react";
 import {DataStore} from "@aws-amplify/datastore";
 import {Role, Teacher, User} from "src/models";
-import {Dialog, Transition} from "@headlessui/react";
 import Image from "next/image";
-import {ChevronDoubleRightIcon} from "@heroicons/react/solid";
 import profilePic from "../../public/Path_2.png";
 import {TrashIcon} from "@heroicons/react/outline";
 
 const Teachers: NextPage = () => {
     const [teachers, setTeachers] = useState<Array<any>>([]);
-    const [isOpen, setIsOpen] = useState<boolean>(false);
     const [name, setName] = useState<string>("");
     const [email, setEmail] = useState<string>("");
     const [password, setPassword] = useState<string>("");
     const [phoneNum, setPhoneNum] = useState<string>("");
-
-    const closeModal = () => {
-        setIsOpen(false);
-    };
-
-    const openModal = () => {
-        setIsOpen(true);
-    };
 
     const addTeacher = async () => {
         const teacherRole = await DataStore.query(Role, "2");
@@ -42,7 +32,6 @@ const Teachers: NextPage = () => {
                 user: newTeacher,
             })
         );
-        closeModal();
     };
 
     const getTeachers = async () => {
@@ -67,44 +56,48 @@ const Teachers: NextPage = () => {
     }, []);
     return (
         <>
-            <div className="mx-4 flex justify-between items-end mb-6">
-                <h2 className="text-4xl text-gray-800 font-semibold">Teacher</h2>
-                <div className="text-sm flex items-center font-medium">
-                    <Link href={"/admin"}>
-                        <a className="text-gray-600">Dashboard</a>
-                    </Link>
-                    <ChevronDoubleRightIcon className="h-2 w-2 mx-2"/>
-                    <p className="text-blue-600">Teacher</p>
+            <Head>
+                <title>Teachers - VEER</title>
+            </Head>
+            <div className="flex justify-between m-4">
+                <h2 className="text-3xl font-bold">Teacher</h2>
+                <div className="text-sm breadcrumbs">
+                    <ul>
+                        <li>
+                            <Link href={"/admin"}>
+                                <a>Dashboard</a>
+                            </Link>
+                        </li>
+                        <li>Teachers</li>
+                    </ul>
                 </div>
             </div>
-            <div className="rounded-2xl bg-white p-5">
+            <div className="card bordered p-4">
                 <div className="flex items-center mb-8 justify-between">
-                    <div className="bg-gray-100 flex items-center py-2.5 px-4 rounded-2xl block text-gray-500">
-                        <input
-                            className="focus:outline-none placeholder-gray-500 w-full font-medium focus:outline-none bg-transparent"
-                            aria-label="search"
-                            placeholder="Search"
-                        />
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            className="h-5 w-5 ml-auto"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor"
-                        >
-                            <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                strokeWidth="2"
-                                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                            />
-                        </svg>
+                    <div className="form-control">
+                        <div className="relative">
+                            <input type="text" placeholder="Search"
+                                   className="w-full pr-16 input input-primary input-bordered"/>
+                            <button className="absolute top-0 right-0 rounded-l-none btn btn-primary">
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    className="h-5 w-5 ml-auto"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke="currentColor"
+                                >
+                                    <path
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        strokeWidth="2"
+                                        d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                                    />
+                                </svg>
+                            </button>
+                        </div>
                     </div>
-                    <button
-                        type="button"
-                        onClick={openModal}
-                        className="py-2 px-5 font-medium bg-blue-500 text-white rounded-full flex items-center hover:bg-blue-700 focus:ring focus:ring-blue-200"
-                    >
+
+                    <label htmlFor="my-modal-2" className="btn btn-primary modal-button">
                         <span className="mr-2">Add Teacher</span>
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -120,159 +113,123 @@ const Teachers: NextPage = () => {
                                 d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"
                             />
                         </svg>
-                    </button>
-                    <Transition appear show={isOpen} as={Fragment}>
-                        <Dialog
-                            as="div"
-                            className="fixed inset-0 z-10 overflow-y-auto"
-                            onClose={closeModal}
-                        >
-                            <div className="min-h-screen px-4 text-center">
-                                <Dialog.Overlay className="fixed inset-0 bg-black opacity-30"/>
-                                {/* This element is to trick the browser into centering the modal contents. */}
-                                <span
-                                    className="inline-block h-screen align-middle"
-                                    aria-hidden="true"
-                                >&#8203;
-                                </span>
-                                <Transition.Child
-                                    as={Fragment}
-                                    enter="ease-out duration-300"
-                                    enterFrom="opacity-0 scale-95"
-                                    enterTo="opacity-100 scale-100"
-                                    leave="ease-in duration-200"
-                                    leaveFrom="opacity-100 scale-100"
-                                    leaveTo="opacity-0 scale-95"
-                                >
-                                    <div
-                                        className="inline-block w-full max-w-md p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-2xl">
-                                        <Dialog.Title
-                                            as="h3"
-                                            className="text-lg font-medium leading-6 text-gray-900 font-bold"
-                                        >
-                                            Add Teacher
-                                        </Dialog.Title>
-                                        <div className="my-6">
-                                            <input
-                                                onChange={(e) => setName(e.target.value)}
-                                                className="focus:outline-none block w-full bg-gray-100 mb-5 font-medium py-2.5 px-4 rounded-2xl placeholder-gray-500"
-                                                aria-label="name"
-                                                placeholder="Full Name"
-                                            />
-                                            <input
-                                                onChange={(e) => setPhoneNum(e.target.value)}
-                                                className="focus:outline-none block w-full bg-gray-100 mb-5 font-medium py-2.5 px-4 rounded-2xl placeholder-gray-500"
-                                                aria-label="phoneNum"
-                                                placeholder="Phone number"
-                                            />
-                                            <input
-                                                onChange={(e) => setEmail(e.target.value)}
-                                                className="focus:outline-none block w-full bg-gray-100 mb-5 font-medium py-2.5 px-4 rounded-2xl placeholder-gray-500"
-                                                aria-label="email"
-                                                placeholder="Email Address"
-                                            />
-                                            <input
-                                                onChange={(e) => setPassword(e.target.value)}
-                                                className="focus:outline-none block w-full bg-gray-100 mb-5 font-medium py-2.5 px-4 rounded-2xl placeholder-gray-500"
-                                                aria-label="password"
-                                                placeholder="Password"
-                                            />
-                                        </div>
-
-                                        <div className="mt-4">
-                                            <button
-                                                type="button"
-                                                className="inline-flex py-2 px-5 font-medium bg-blue-500 text-white rounded-full flex items-center"
-                                                onClick={addTeacher}
-                                            >
-                                                Add
-                                            </button>
-                                        </div>
-                                    </div>
-                                </Transition.Child>
+                    </label>
+                    <input type="checkbox" id="my-modal-2" className="modal-toggle"/>
+                    <div className="modal">
+                        <div className="modal-box">
+                            <h3 className="text-xl font-medium leading-6 font-bold">Add Teacher</h3>
+                            <div className="my-6 space-y-5">
+                                <div className="form-control">
+                                    <input
+                                        onChange={(e) => setName(e.target.value)}
+                                        className="input input-bordered"
+                                        aria-label="name"
+                                        placeholder="Full Name"
+                                    />
+                                </div>
+                                <div className="form-control">
+                                    <input
+                                        onChange={(e) => setPhoneNum(e.target.value)}
+                                        className="input input-bordered"
+                                        aria-label="phoneNum"
+                                        placeholder="Phone number"
+                                    />
+                                </div>
+                                <div className="form-control">
+                                    <input
+                                        onChange={(e) => setEmail(e.target.value)}
+                                        className="input input-bordered"
+                                        aria-label="email"
+                                        placeholder="Email Address"
+                                    />
+                                </div>
+                                <div className="form-control">
+                                    <input
+                                        onChange={(e) => setPassword(e.target.value)}
+                                        className="input input-bordered"
+                                        aria-label="password"
+                                        placeholder="Password"
+                                    />
+                                </div>
                             </div>
-                        </Dialog>
-                    </Transition>
+
+                            <div className="modal-action">
+                                <label htmlFor="my-modal-2" className="btn btn-primary" onClick={addTeacher}>Add</label>
+                                <label htmlFor="my-modal-2" className="btn">Close</label>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <table className="min-w-full divide-y divide-gray-200">
-                    <thead className="bg-gray-100">
-                    <tr>
-                        <th
-                            scope="col"
-                            className="font-medium px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                        >
-                            Name
-                        </th>
-                        <th
-                            scope="col"
-                            className="font-medium px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                        >
-                            Phone Number
-                        </th>
-                        <th scope="col">
-                <span
-                    className="font-medium px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Actions
-                </span>
-                        </th>
-                    </tr>
-                    </thead>
-                    <tbody className="bg-white divide-y divide-gray-200">
-                    {teachers.map((teacher) => (
-                        <tr key={teacher.id}>
-                            <td className="px-6 py-4 whitespace-nowrap">
-                                <div className="flex items-center">
-                                    <div className="flex-shrink-0 h-10 w-10">
-                                        <Image
-                                            className="rounded-full"
-                                            src={profilePic}
-                                            alt="Picture of the author"
-                                        />
-                                    </div>
-                                    <div className="ml-4">
-                                        <div className="text-sm font-medium text-gray-900">
-                                            {teacher.name}
-                                        </div>
-                                        <div className="text-sm text-gray-500">
-                                            {teacher.email}
-                                        </div>
-                                    </div>
-                                </div>
-                            </td>
-                            <td className="px-6 py-4 whitespace-nowrap">
-                                <div className="text-sm text-gray-900">
-                                    {teacher.phoneNum}
-                                </div>
-                            </td>
-                            <td className="px-6 py-4 flex justify-center">
-                                <button
-                                    className="text-white bg-blue-500 rounded-full mr-1.5 h-10 w-10 flex items-center justify-center hover:bg-blue-700 focus:ring focus:ring-blue-200">
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        className="h-5 w-5"
-                                        fill="none"
-                                        viewBox="0 0 24 24"
-                                        stroke="currentColor"
-                                    >
-                                        <path
-                                            strokeLinecap="round"
-                                            strokeLinejoin="round"
-                                            strokeWidth={2}
-                                            d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"
-                                        />
-                                    </svg>
-                                </button>
-                                <button
-                                    onClick={() => deleteTeacher(teacher.id)}
-                                    className="text-white bg-red-500 rounded-full ml-1.5 h-10 w-10 flex items-center justify-center hover:bg-red-700 focus:ring focus:ring-red-200"
-                                >
-                                    <TrashIcon className="h-5 w-5" />
-                                </button>
-                            </td>
+
+                <div className="overflow-x-auto">
+                    <table className="table w-full">
+                        <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Phone Number</th>
+                            <th>Actions</th>
                         </tr>
-                    ))}
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                        {teachers.map((teacher) => (
+                            <tr key={teacher.id}>
+                                <td>
+                                    <div className="flex items-center space-x-3">
+                                        <div className="avatar">
+                                            <div className="w-12 h-12 rounded-full">
+                                                <Image
+                                                    src={profilePic}
+                                                    alt="Picture of the author"
+                                                />
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div className="font-bold">
+                                                {teacher.name}
+                                            </div>
+                                            <div className="text-sm opacity-50">
+                                                {teacher.email}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div className="text-sm">
+                                        {teacher.phoneNum}
+                                    </div>
+                                </td>
+                                <td>
+                                    <div className="flex">
+                                        <button
+                                            className="bg-primary rounded-full mr-1.5 h-10 w-10 flex items-center justify-center hover:bg-primary-focus focus:ring focus:ring-primary-focus">
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                className="h-5 w-5"
+                                                fill="none"
+                                                viewBox="0 0 24 24"
+                                                stroke="currentColor"
+                                            >
+                                                <path
+                                                    strokeLinecap="round"
+                                                    strokeLinejoin="round"
+                                                    strokeWidth={2}
+                                                    d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"
+                                                />
+                                            </svg>
+                                        </button>
+                                        <button
+                                            onClick={() => deleteTeacher(teacher.id)}
+                                            className="text-white bg-red-500 rounded-full ml-1.5 h-10 w-10 flex items-center justify-center hover:bg-red-700 focus:ring focus:ring-red-200"
+                                        >
+                                            <TrashIcon className="h-5 w-5"/>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                        ))}
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </>
     );

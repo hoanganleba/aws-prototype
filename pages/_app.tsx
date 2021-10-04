@@ -107,10 +107,10 @@ function MyApp({Component, pageProps}: AppLayoutProps) {
             value={{errorMessage, userId, userType, login, logout}}
         >
             <NextNprogress
-                color="#2563EB"
+                color="#570df8"
                 startPosition={0.3}
                 stopDelayMs={200}
-                height={3}
+                height={6}
                 options={{ showSpinner: false }}
                 showOnShallow={true}
             />
